@@ -2,26 +2,346 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>住所選択</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ごみ分別カードゲーム ルールブック</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=BIZ+UDPGothic:wght@400;700&display=swap" rel="stylesheet">
 <style>
-    .hidden {
-    display: none;
+  :root{
+    --cream:#FFF9EE;
+    --card:#FFFFFF;
+    --ink:#33404A;
+    --ink-soft:#6B7680;
+    --green:#3FA65C;
+    --green-bg:#E5F6E9;
+    --yellow:#F5B93D;
+    --yellow-bg:#FFF4DC;
+    --red:#EF5B4E;
+    --red-bg:#FDE6E3;
+    --blue:#3E92CC;
+    --blue-bg:#E4F1FA;
+    --shadow: 0 6px 0 rgba(51,64,74,0.08), 0 10px 24px rgba(51,64,74,0.08);
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 8% 12%, var(--green-bg) 0%, transparent 40%),
+      radial-gradient(circle at 92% 18%, var(--red-bg) 0%, transparent 38%),
+      radial-gradient(circle at 50% 90%, var(--yellow-bg) 0%, transparent 45%),
+      var(--cream);
+    color:var(--ink);
+    font-family:'BIZ UDPGothic','Hiragino Maru Gothic ProN','Yu Gothic',sans-serif;
+    font-size:18px;
+    line-height:1.9;
+    padding-bottom:80px;
+  }
+  ruby rt{
+    font-size:0.55em;
+    color:var(--ink-soft);
+    font-weight:400;
+    letter-spacing:0;
+  }
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:0 20px;
   }
 
-  body {
-    background-image: url("background.png");
-    background-size: cover;
+  /* HERO */
+  .hero{
+    text-align:center;
+    padding:56px 20px 40px;
+    position:relative;
+  }
+  .hero-cards{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    margin-bottom:18px;
+  }
+  .mini-card{
+    width:52px; height:70px;
+    border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:26px;
+    box-shadow: var(--shadow);
+    transform: rotate(var(--r, 0deg));
+    background:var(--card);
+    border:3px solid var(--c, var(--ink));
+  }
+  .mini-card:nth-child(1){ --r:-10deg; --c:var(--green); }
+  .mini-card:nth-child(2){ --r:4deg; --c:var(--yellow); margin-top:-8px;}
+  .mini-card:nth-child(3){ --r:12deg; --c:var(--red); }
+
+  h1{
+    font-family:'Zen Maru Gothic', sans-serif;
+    font-weight:900;
+    font-size:clamp(30px, 7vw, 44px);
+    margin:0 0 8px;
+    color:var(--ink);
+    letter-spacing:0.02em;
+  }
+  .subtitle{
+    font-family:'Zen Maru Gothic', sans-serif;
+    font-weight:700;
+    color:var(--ink-soft);
+    font-size:17px;
+    margin:0;
+    letter-spacing:0.1em;
   }
 
-    select, button { padding: 10px; font-size: 16px; margin: 10px; border-radius: 8px; }
-    body {
-  text-align: center;
-  margin-top: 100px;
-  color: black;
+  /* CARD (base block) */
+  .card{
+    background:var(--card);
+    border-radius:22px;
+    box-shadow:var(--shadow);
+    padding:26px 24px;
+    margin:22px 0;
+  }
+  .card h2{
+    font-family:'Zen Maru Gothic', sans-serif;
+    font-weight:700;
+    font-size:22px;
+    margin:0 0 12px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .objective p{ margin:0; }
+
+  /* TABS */
+  .tabs{
+    display:flex;
+    gap:12px;
+    max-width:760px;
+    margin:30px auto 0;
+    padding:0 20px;
+  }
+  .tab-btn{
+    flex:1;
+    font-family:'Zen Maru Gothic', sans-serif;
+    font-weight:700;
+    font-size:17px;
+    padding:16px 10px;
+    border-radius:18px 18px 0 0;
+    border:none;
+    cursor:pointer;
+    color:var(--card);
+    opacity:0.55;
+    transition:opacity 0.2s ease, transform 0.15s ease;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+  }
+  .tab-btn:hover{ opacity:0.8; }
+  .tab-btn.active{ opacity:1; }
+  .tab-btn:focus-visible{ outline:3px solid var(--ink); outline-offset:2px; }
+  #easy-btn{ background:var(--green); }
+  #hard-btn{ background:var(--red); }
+
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+
+  .section-band{
+    border-radius:0 0 22px 22px;
+    padding:4px;
+  }
+  .section-band.easy{ background:var(--green); }
+  .section-band.hard{ background:var(--red); }
+  .section-inner{
+    background:var(--cream);
+    border-radius:0 0 20px 20px;
+    padding:20px 4px 4px;
+  }
+
+  /* Step list */
+  ol.steps{
+    list-style:none;
+    margin:0;
+    padding:0;
+    counter-reset:step;
+  }
+  ol.steps li{
+    counter-increment:step;
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    margin-bottom:16px;
+  }
+  ol.steps li:last-child{ margin-bottom:0; }
+  ol.steps li::before{
+    content:counter(step);
+    flex:none;
+    width:34px; height:34px;
+    border-radius:50%;
+    background:var(--accent, var(--blue));
+    color:#fff;
+    font-weight:700;
+    font-family:'Zen Maru Gothic', sans-serif;
+    display:flex; align-items:center; justify-content:center;
+    font-size:16px;
+    box-shadow:0 3px 0 rgba(0,0,0,0.12);
+  }
+  .easy-card ol.steps li::before{ --accent: var(--green); }
+  .hard-card ol.steps li::before{ --accent: var(--red); }
+  ol.steps li p{ margin:4px 0 0; }
+
+  .result-box{
+    background:var(--yellow-bg);
+    border:2px dashed var(--yellow);
+    border-radius:16px;
+    padding:16px 18px;
+    display:flex;
+    gap:12px;
+    align-items:center;
+    font-weight:700;
+    font-family:'Zen Maru Gothic', sans-serif;
+  }
+  .result-box .icon{ font-size:26px; flex:none; }
+
+  /* Traffic light score table (signature element) */
+  .score-panel{
+    display:flex;
+    gap:18px;
+    align-items:center;
+    flex-wrap:wrap;
+    margin:10px 0 18px;
+  }
+  .light-box{
+    background:#2E3540;
+    border-radius:20px;
+    padding:14px 10px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    box-shadow:var(--shadow);
+    flex:none;
+  }
+  .light{
+    width:44px; height:44px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Zen Maru Gothic', sans-serif;
+    font-weight:900;
+    font-size:15px;
+    color:#fff;
+    box-shadow: inset 0 -4px 6px rgba(0,0,0,0.25), 0 0 14px var(--glow);
+  }
+  .light.g{ background:var(--green); --glow: rgba(63,166,92,0.7); }
+  .light.y{ background:var(--yellow); --glow: rgba(245,185,61,0.7); color:#5a4300;}
+  .light.r{ background:var(--red); --glow: rgba(239,91,78,0.7); }
+
+  .score-legend{
+    flex:1;
+    min-width:220px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .score-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:16px;
+  }
+  .score-row .dot{
+    width:16px; height:16px; border-radius:50%; flex:none;
+  }
+  .score-row .dot.g{ background:var(--green); }
+  .score-row .dot.y{ background:var(--yellow); }
+  .score-row .dot.r{ background:var(--red); }
+
+  .note{
+    color:var(--ink-soft);
+    font-size:15px;
+    margin-top:14px;
+  }
+
+  ruby{ font-feature-settings:"ruby" 1; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; scroll-behavior:auto !important; }
+  }
+
+  @media (max-width:480px){
+    body{ font-size:16.5px; }
+    .card{ padding:20px 18px; }
+    .tab-btn{ font-size:15px; padding:14px 6px;}
+  }
+
+  select,button{
+    font-family:'Zen Maru Gothic', sans-serif;
+    font-size:18px;
+    font-weight:700;
+
+    width:140px;
+    height:60px;
+
+    padding:10px 20px;
+
+    background:#fff;
+    color:var(--ink);
+
+    border:3px solid var(--green);
+    border-radius:14px;
+
+    box-shadow: var(--shadow);
+
+    cursor:pointer;
+    transition:0.2s;
 }
+.home-btn{
+    border-color:var(--green);
+}
+
+.rule-btn{
+    border-color:var(--yellow);
+}
+
+.index-btn{
+    border-color:var(--red);
+}
+
 </style>
 </head>
 <body>
-    <section>
-      <h1>池田市ごみ分別</h1>
-    </section>
+
+  <div class="hero">
+    <div class="hero-cards">
+      <div class="mini-card">🥫</div>
+      <div class="mini-card">📄</div>
+      <div class="mini-card">♻️</div>
+    </div>
+    <h1>池田市ごみ分別</h1>
+
+    <a href="home.html">
+    <button class="home-btn">ホーム</button>
+</a>
+
+<a href="rule.html">
+    <button class="rule-btn">ルール</button>
+
+
+<a href="index.html">
+    <button class="index-btn">地域選択</button>
+</a>
+
+<script>
+  const buttons = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.tab-panel');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+      panels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected','true');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
