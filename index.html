@@ -8,9 +8,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=BIZ+UDPGothic:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  .hidden {
-    display: none;
-  }
   :root{
     --cream:#FFF9EE;
     --card:#FFFFFF;
@@ -24,7 +21,6 @@
     --red-bg:#FDE6E3;
     --blue:#3E92CC;
     --blue-bg:#E4F1FA;
-    --yellowgreen:#81c72c;      
     --shadow: 0 6px 0 rgba(51,64,74,0.08), 0 10px 24px rgba(51,64,74,0.08);
   }
   *{ box-sizing:border-box; }
@@ -290,14 +286,13 @@
     background:#fff;
     color:var(--ink);
 
-    border:3px solid;
+    border:3px solid var(--green);
     border-radius:14px;
 
     box-shadow: var(--shadow);
 
     cursor:pointer;
     transition:0.2s;
-    
 }
 .home-btn{
     border-color:var(--green);
@@ -311,23 +306,25 @@
     border-color:var(--red);
 }
 
-#city{
-  border-color:var(--blue);
-    width:280px;
-    height:60px;
-    margin-top:30px;   
+/* 吹き出しのベースデザイン */
+.balloon {
+  position: relative;
+  display: inline-block;
+  margin: 15px 0;
+  padding: 10px 15px;
+  background: #bfdfff; /* 吹き出しの背景色 */
+  color: #333;         /* 文字色 */
+  border-radius: 8px;  /* 角の丸み */
 }
-#ward{
-  border-color:var(--blue);
-    width:280px;
-    height:60px;
-    margin-top:30px;   
-}
-#searchBtn{
-  border-color:var(--yellowgreen);
-    width:180px;
-    height:60px;
-    margin-top:30px;
+
+/* 吹き出しの三角（矢印）部分 */
+.balloon::before {
+  content: "";
+  position: absolute;
+  top: 100%;           /* 吹き出しの下側に配置 */
+  left: 30px;          /* 左端からの位置（お好みで調整） */
+  border: 10px solid transparent;
+  border-top-color: #bfdfff;; /* 背景色と同じ色にする */
 }
 
 </style>
@@ -348,231 +345,41 @@
 
 <a href="rule.html">
     <button class="rule-btn">ルール</button>
-</a>
+
 
 <a href="index.html">
     <button class="index-btn"><ruby>地域<rt>ちいき</rt></ruby><ruby>選択<rt>せんたく</rt></ruby></button>
 </a>
 
-<br>
-
-<!-- 市町村 -->
-<select id="city">
-  <option value="">地域を選択</option>
-</select>
-
-<br>
-
-<!-- 区（最初は非表示） -->
-<select id="ward" class="hidden">
-  <option value="">区を選択</option>
-</select>
-
-<br>
-
-<button id="searchBtn">検索</button>
-
-<p id="result"></p>
+<div class="wrap">
+    <section class="card objective">
+      <h2>🎯 ゲットペアーズについて</h2>
+      <p>
+        みなさんは「ごみ<ruby>分別<rt>ぶんべつ</rt></ruby>」と<ruby>聞<rt>き</rt></ruby>くとどのようなことを<ruby>思<rt>おも</rt></ruby>い<ruby>浮<rt>う</rt></ruby>かべますか？<br>
+        <span class="balloon">「めんどくさい」</span>
+        <span class="balloon">「むずかしい」</span>
+        <span class="balloon">「よくわからない」</span><br>
+        そう<ruby>思<rt>おも</rt></ruby>う<ruby>人<rt>ひと</rt></ruby>がほとんどだと<ruby>思<rt>おも</rt></ruby>います。<br>
+        そこで、ゲームを<ruby>通<rt>とお</rt></ruby>して<ruby>楽<rt>たの</rt></ruby>しくごみ<ruby>分別<rt>ぶんべつ</rt></ruby>を<ruby>学<rt>まな</rt></ruby>べるように<ruby>作<rt>つく</rt></ruby>られたのが<br>
+        <b>「ゲットペアーズ」</b><br>です。<br>
+        <ruby>子供<rt>こども</rt></ruby>から<ruby>大人<rt>おとな</rt></ruby>まで、みんなで<ruby>楽<rt>たの</rt></ruby>しくごみ<ruby>分別<rt>ぶんべつ</rt></ruby>を<ruby>学<rt>まな</rt></ruby>びましょう！<br><br>
+  
+      </p>
+    </section>
+  </div>
 
 <script>
-const osaka = {
-"池田市": [],
-"泉大津市":[],
-"泉佐野市":[],
-"和泉市":[],
-"茨木市":[],
-"大阪狭山市":[],
-"大阪市":["北区","都島区","福島区","此花区","中央区",
-    "西区","港区","大正区","天王寺区","浪速区",
-    "西淀川区","淀川区","東淀川区","東成区","生野区",
-    "旭区","城東区","鶴見区","阿倍野区","住之江区",
-    "住吉区","東住吉区","平野区","西成区"],
-"貝塚市":[],
-"柏原市":[],
-"交野市":[],
-"門真市":[],
-"河内長野市":[],
-"岸和田市":[],
-"堺市":["堺区","中区","東区","西区","南区","北区","美原区"],
-"吹田市":[],
-"摂津市":[],
-"高石市":[],
-"高槻市":[],
-"大東市":[],
-"豊中市":[],
-"富田林市":[],
-"寝屋川市":[],
-"羽曳野市":[],
-"阪南市":[],
-"東大阪市":[],
-"枚方市":[],
-"藤井寺市":[],
-"松原市":[],
-"箕面市":[],
-"守口市":[],
-"八尾市":[],
-};
-
- 
-const citySelect = document.getElementById("city");
-const wardSelect = document.getElementById("ward");
-const result = document.getElementById("result");
-
-// 市町村をセット
-Object.keys(osaka).forEach(city => {
-  const option = document.createElement("option");
-  option.value = city;
-  option.textContent = city;
-  citySelect.appendChild(option);
-});
-
-// 市町村変更
-citySelect.addEventListener("change", function() {
-  const city = this.value;
-  const wards = osaka[city];
-
-  // 初期化
-  wardSelect.innerHTML = '<option value="">区を選択</option>';
-  result.textContent = "";
-
-  if (wards.length > 0) {
-    // 区がある → 表示
-    wardSelect.classList.remove("hidden");
-
-    wards.forEach(ward => {
-      const option = document.createElement("option");
-      option.value = ward;
-      option.textContent = ward;
-      wardSelect.appendChild(option);
+  const buttons = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.tab-panel');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+      panels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected','true');
+      document.getElementById(btn.dataset.tab).classList.add('active');
     });
-
-  } else {
-    // 区がない → 非表示＆確定表示
-    wardSelect.classList.add("hidden");
-    result.textContent = "選択住所：" + city;
-  }
-});
-
-// 区選択時
-wardSelect.addEventListener("change", function() {
-  const city = citySelect.value;
-  const ward = this.value;
-
-  if (ward) {
-    result.textContent = "選択住所：" + city + " " + ward;
-  }
-});
-
-// 検索ボタン
-const searchBtn = document.getElementById("searchBtn");
-
-// ページ対応表
-const pageMap = {
-  // 市
-  "池田市": "pages/ikeda.html",
-  "泉大津市":"pages/izumiotsu.html",
-  "泉佐野市":"pages/izumisano.html",
-  "和泉市":"pages/izumi.html",
-  "茨木市":"pages/ibaraki.html",
-  "大阪狭山市":"pages/osakasayama.html",
-  "貝塚市":"pages/kaiduka.html",
-  "柏原市":"pages/kashiwara.html",
-  "交野市":"pages/katano.html",
-  "門真市":"pages/kadoma.html",
-  "河内長野市":"pages/kawachinagano.html",
-  "岸和田市":"pages/kishiwada.html",
-  "吹田市": "pages/suita.html",
-  "摂津市":"pages/settsu.html",
-  "高石市":"pages/takaishi.html",
-  "高槻市":"pages/takatsuki.html",
-  "太東市":"pages/taitou.html",
-  "豊中市": "pages/toyonaka.html",
-  "富田林市":"pages/tondabayashi.html",
-  "寝屋川市": "pages/neyagawa.html",
-  "羽曳野市": "pages/habikino.html",
-  "阪南市": "pages/hannnann.html",
-  "東大阪市": "pages/higashiosaka.html",
-  "枚方市": "pages/hirakata.html",
-  "藤井寺市": "pages/fujiidera.html",
-  "松原市": "pages/matsubara.html",
-  "箕面市": "pages/minoo.html",
-  "守口市": "pages/moriguchi.html",
-  "八尾市": "pages/yao.html",
-
-  // 大阪市
-  "大阪市-北区": "pages/osakakitaku.html",
-  "大阪市-都島区": "pages/osakatsushima.html",
-  "大阪市-福島区": "pages/osakafukushima.html",
-  "大阪市-此花区": "pages/osakakonohana.html",
-  "大阪市-中央区": "pages/osakachuo.html",
-  "大阪市-西区": "pages/osakanishi.html",
-  "大阪市-港区": "pages/osakaminato.html",
-  "大阪市-大正区": "pages/osakataisho.html",
-  "大阪市-天王寺区": "pages/osakatennoji.html",
-  "大阪市-浪速区": "pages/osakananiwa.html",
-  "大阪市-西淀川区": "pages/osakanishiyodogawa.html",
-  "大阪市-東淀川区": "pages/osakahigashiyodogawa.html",
-  "大阪市-東淀区": "pages/osakahigashinari.html",
-  "大阪市-生野区": "pages/osakaikuno.html",
-  "大阪市-旭区": "pages/osakaasahi.html",
-  "大阪市-城東区": "pages/osakajoto.html",
-  "大阪市-鶴見区": "pages/osakatsurumi.html",
-  "大阪市-阿倍野区": "pages/osakaabeno.html",
-  "大阪市-住之江区": "pages/osakasuminoe.html",
-  "大阪市-東住吉区": "pages/osakahigashisumiyoshi.html",
-  "大阪市-平野区": "pages/osakahirano.html",
-  "大阪市-西成区": "pages/osakanishinari.html",
-  
-
-  // 堺市
-  "堺市-堺区": "pages/sakaisakai.html",
-  "堺市-中区": "pages/sakainaka.html",
-  "堺市-東区": "pages/sakaihigashi.html",
-  "堺市-西区": "pages/sakainishi.html",
-  "堺市-南区": "pages/sakaiminami.html",
-  "堺市-北区": "pages/sakaikita.html",
-  "堺市-三原区": "pages/sakaimihara.html",
-};
-
-// 検索ボタンが押されたとき
-searchBtn.addEventListener("click", function () {
-
-  const city = citySelect.value;
-
-  if (city === "") {
-    alert("市町村を選択してください");
-    return;
-  }
-
-  let key;
-
-  // 区がある市
-  if (osaka[city].length > 0) {
-
-    const ward = wardSelect.value;
-
-    if (ward === "") {
-      alert("区を選択してください");
-      return;
-    }
-
-    key = city + "-" + ward;
-
-  } else {
-
-    // 区がない市
-    key = city;
-  }
-
-  // ページへ移動
-  if (pageMap[key]) {
-    window.location.href = pageMap[key];
-  } else {
-    alert("この地域のページはまだ作成されていません。");
-  }
-
-});
-
+  });
 </script>
 
 </body>
