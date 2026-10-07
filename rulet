@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ルーレット</title>
+
+    <style>
+        body {
+            text-align: center;
+            font-family: sans-serif;
+            background-color: #fff8e8;
+        }
+
+        h1 {
+            color: #5b8c5a;
+        }
+
+        .roulette-container {
+            position: relative;
+            width: 400px;
+            margin: 30px auto;
+        }
+
+        canvas {
+            width: 400px;
+            height: 400px;
+        }
+
+        /* 上の矢印 */
+        .arrow {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 40px solid #e85d5d;
+            z-index: 2;
+        }
+
+        button {
+            padding: 15px 50px;
+            font-size: 20px;
+            border: none;
+            border-radius: 30px;
+            background-color: #75a96b;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #5b8c5a;
+        }
+
+        #result {
+            margin-top: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🎡 ルーレット</h1>
+
+    <div class="roulette-container">
+        <div class="arrow"></div>
+        <canvas id="roulette" width="400" height="400"></canvas>
+    </div>
+
+    <button onclick="startRoulette()">スタート！</button>
+
+    <div id="result">結果：？</div>
+
+
+    <script>
+
+        // ルーレットの項目
+        const items = [
+            "燃えるごみ",
+            "燃えないごみ",
+            "資源ごみ",
+            "粗大ごみ",
+            "危険ごみ",
+            "もう一回！"
+        ];
+
+        const canvas = document.getElementById("roulette");
+        const ctx = canvas.getContext("2d");
+
+        let rotation = 0;
+        let spinning = false;
+
+        // ルーレットを描く
+        function drawRoulette() {
+
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = 190;
+
+            const angle = (Math.PI * 2) / items.length;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            items.forEach((item, i) => {
+
+                const startAngle = i * angle + rotation;
+                const endAngle = startAngle + angle;
+
+                // 色
+                const colors = [
+                    "#ffd166",
+                    "#90be6d",
+                    "#4d96ff",
+                    "#ff9f68",
+                    "#ff6b6b",
+                    "#c77dff"
+                ];
+
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(
+                    centerX,
+                    centerY,
+                    radius,
+                    startAngle,
+                    endAngle
+                );
+                ctx.closePath();
+
+                ctx.fillStyle = colors[i % colors.length];
+                ctx.fill();
+
+                ctx.strokeStyle = "white";
+                ctx.lineWidth = 4;
+                ctx.stroke();
+
+
+                // 文字
+                ctx.save();
+
+                ctx.translate(centerX, centerY);
+                ctx.rotate(startAngle + angle / 2);
+
+                ctx.fillStyle = "#333";
+                ctx.font = "bold 16px sans-serif";
+                ctx.textAlign = "center";
+
+                ctx.fillText(item, radius * 0.65, 5);
+
+                ctx.restore();
+            });
+        }
+
+
+        // ルーレットを回す
+        function startRoulette() {
+
+            if (spinning) return;
+
+            spinning = true;
+
+            document.getElementById("result").textContent = "回転中……";
+
+            const startRotation = rotation;
+
+            // 何回転するか
+            const spinAmount =
+                Math.PI * 2 * (5 + Math.random() * 3);
+
+            const duration = 3000;
+            const startTime = performance.now();
+
+
+            function animate(currentTime) {
+
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+
+                // ゆっくり止まる
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+
+                rotation =
+                    startRotation +
+                    spinAmount * easeOut;
+
+                drawRoulette();
+
+                if (progress < 1) {
+
+                    requestAnimationFrame(animate);
+
+                } else {
+
+                    spinning = false;
+
+                    showResult();
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+
+        // 結果を表示
+        function showResult() {
+
+            const angle = (Math.PI * 2) / items.length;
+
+            // 上の矢印が指している位置
+            let normalized =
+                ((-rotation % (Math.PI * 2)) + Math.PI * 2)
+                % (Math.PI * 2);
+
+            const index =
+                Math.floor(normalized / angle);
+
+            document.getElementById("result").textContent =
+                "結果： " + items[index];
+        }
+
+
+        // 最初に描画
+        drawRoulette();
+
+    </script>
+
+</body>
+</html>
