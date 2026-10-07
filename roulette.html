@@ -345,7 +345,7 @@
     <button class="roulette-btn">ルーレット</button>
 </a>
 
-    <h1>🎡 ルーレット</h1>
+    <h1>🎡 環境影響ルーレット</h1>
 
     <div class="roulette-container">
         <div class="arrow"></div>
@@ -424,7 +424,7 @@
                 ctx.rotate(startAngle + angle / 2);
 
                 ctx.fillStyle = "#333";
-                    ctx.textAlign = "left";
+                    ctx.textAlign = "center";
                     // 文字数に合わせて文字を小さくする
                     let fontSize = 16;
 
@@ -436,7 +436,7 @@
 
                 ctx.font = `bold ${fontSize}px sans-serif`;
 
-                ctx.fillText(item, radius * 0.65, 5);
+                ctx.fillText(item, radius * 0.55, 5);
                 ctx.restore();
             });
         }
