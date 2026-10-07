@@ -417,6 +417,14 @@
     display: flex;
     gap: 20px;
 }
+.garbage-box.burnable {
+    border-color: #e8a35b;
+    background: #fff8ed;
+}
+
+.garbage-box.burnable legend {
+    background: #e8a35b;
+}
 
 </style>
 </head>
@@ -512,12 +520,14 @@
 <div class="three-boxes">
 
         <div class="small-box">
+          <fieldset class="garbage-box burnable"></fieldset>
             <h2>燃えるゴミ</h2>
 
             <ul>
                 <li>ボール</li>
                 <li>生ごみ</li>
             </ul>
+          </fieldset>
         </div>
 
 
