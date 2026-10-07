@@ -359,9 +359,9 @@
 
         // ルーレットの項目
         const items = [
-            "分別しなかったら<br>世界はどうなるか",
-            "分別したら<br>世界はどうなるか",
-            "ポイ捨てしたら<br>どうなるか"
+            "分別しなかったら世界はどうなるか",
+            "分別したら世界はどうなるか",
+            "ポイ捨てしたらどうなるか"
         ];
 
         const canvas = document.getElementById("roulette");
@@ -422,11 +422,20 @@
                 ctx.rotate(startAngle + angle / 2);
 
                 ctx.fillStyle = "#333";
-                ctx.font = "bold 16px sans-serif";
-                ctx.textAlign = "center";
+                    ctx.textAlign = "center";
+
+                    // 文字数に合わせて文字を小さくする
+                    let fontSize = 16;
+
+                    if (item.length >= 7) {
+                        fontSize = 12;
+                    } else if (item.length >= 5) {
+                        fontSize = 14;
+                }
+
+                ctx.font = `bold ${fontSize}px sans-serif`;
 
                 ctx.fillText(item, radius * 0.65, 5);
-
                 ctx.restore();
             });
         }
