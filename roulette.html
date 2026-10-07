@@ -312,6 +312,17 @@
 .roulette-btn{
     border-color:var(--blue);
 }
+
+.arrow {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 40px;
+    color: #e85d5d;
+    z-index: 2;
+}
+
     </style>
 </head>
 
@@ -349,6 +360,7 @@
 
     <div class="roulette-container">
         <div class="arrow">▼</div>
+
         <canvas id="roulette" width="400" height="400"></canvas>
     </div>
 
