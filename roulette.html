@@ -359,114 +359,221 @@
     <h1>🎡 環境影響ルーレット</h1>
 
     <div class="roulette-container">
-        <div class="arrow"></div>
+    <div class="arrow"></div>
+    <canvas id="roulette" width="400" height="400"></canvas>
+</div>
 
-        <canvas id="roulette" width="400" height="400"></canvas>
-    </div>
+<button id="spinButton" onclick="startRoulette()">スタート！</button>
 
-    <button onclick="startRoulette()">スタート！</button>
+<div id="result">結果：？</div>
 
-    <div id="result">結果：？</div>
+<div class="question-area">
+    <h2>質問一覧（全8問）</h2>
+    <ol id="questionList"></ol>
+</div>
 
 
-    <script>
-    // 8つの質問
-    const questions = [
-        "質問1：好きな食べ物は？",
-        "質問2：好きなゲームは？",
-        "質問3：行ってみたい場所は？",
-        "質問4：好きな季節は？",
-        "質問5：最近楽しかったことは？",
-        "質問6：好きなキャラクターは？",
-        "質問7：挑戦してみたいことは？",
-        "質問8：休日は何をしている？"
-    ];
+    ```html
+<script>
+const questions = [
+    "好きな食べ物は？",
+    "好きなゲームは？",
+    "行ってみたい場所は？",
+    "好きな季節は？",
+    "最近楽しかったことは？",
+    "好きなキャラクターは？",
+    "挑戦してみたいことは？",
+    "休日は何をしている？"
+];
 
-    let selectedQuestions = [];
-    let isSpinning = false;
+let selectedQuestions = [];
+let isSpinning = false;
+let angle = 0;
 
-    const roulette = document.getElementById("roulette");
-    const questionList = document.getElementById("questionList");
-    const result = document.getElementById("result");
-    const spinButton = document.getElementById("spinButton");
+const canvas = document.getElementById("roulette");
+const ctx = canvas.getContext("2d");
+const result = document.getElementById("result");
+const spinButton = document.getElementById("spinButton");
+const questionList = document.getElementById("questionList");
 
-    // 8つの質問を右側に表示
-    function showQuestions() {
-        questionList.innerHTML = "";
+const colors = ["#ffcf8b", "#b9e4a5", "#a9d9f5"];
 
-        questions.forEach(question => {
-            const li = document.createElement("li");
-            li.textContent = question;
-            questionList.appendChild(li);
-        });
+// 右側に8つの質問を表示
+questions.forEach(question => {
+    const li = document.createElement("li");
+    li.textContent = question;
+    questionList.appendChild(li);
+});
+
+// ルーレットを描画
+function drawRoulette() {
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2;
+    const radius = 190;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (selectedQuestions.length === 0) {
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+        ctx.fillStyle = "#eeeeee";
+        ctx.fill();
+        ctx.strokeStyle = "#888888";
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        ctx.fillStyle = "#444444";
+        ctx.font = "bold 20px sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("スタート！", cx, cy);
+        return;
     }
 
-    // 質問をランダムに並べ替える
-    function shuffle(array) {
-        const copied = [...array];
+    const slice = (Math.PI * 2) / selectedQuestions.length;
 
-        for (let i = copied.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [copied[i], copied[j]] = [copied[j], copied[i]];
+    selectedQuestions.forEach((question, i) => {
+        const start = angle + i * slice - Math.PI / 2;
+        const end = start + slice;
+
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.arc(cx, cy, radius, start, end);
+        ctx.closePath();
+        ctx.fillStyle = colors[i % colors.length];
+        ctx.fill();
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // 質問の文字を扇形の中に表示
+        const mid = start + slice / 2;
+        const textRadius = radius * 0.58;
+        const tx = cx + Math.cos(mid) * textRadius;
+        const ty = cy + Math.sin(mid) * textRadius;
+
+        ctx.save();
+        ctx.translate(tx, ty);
+
+        let textAngle = mid + Math.PI / 2;
+        if (Math.cos(mid) < 0) {
+            textAngle += Math.PI;
         }
+        ctx.rotate(textAngle);
 
-        return copied;
-    }
+        ctx.fillStyle = "#333333";
+        ctx.font = "bold 14px sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
 
-    // ボタンを押すと3つ選んでルーレットを回す
-    function spinRoulette() {
-        if (isSpinning) return;
-
-        // 8つからランダムに3つ選ぶ
-        selectedQuestions = shuffle(questions).slice(0, 3);
-
-        // 右側で選ばれた質問を強調する
-        const listItems = questionList.querySelectorAll("li");
-
-        listItems.forEach(li => {
-            li.classList.toggle(
-                "selected",
-                selectedQuestions.includes(li.textContent)
+        // 長い質問は折り返して表示
+        const maxWidth = 105;
+        const words = question.match(/.{1,8}/g) || [question];
+        words.forEach((line, lineIndex) => {
+            ctx.fillText(
+                line,
+                0,
+                (lineIndex - (words.length - 1) / 2) * 18,
+                maxWidth
             );
         });
 
-        isSpinning = true;
-        spinButton.disabled = true;
-        result.textContent = "";
+        ctx.restore();
+    });
 
-        // 当たりの質問を決める
-        const winnerIndex = Math.floor(
-            Math.random() * selectedQuestions.length
+    // 中心の円
+    ctx.beginPath();
+    ctx.arc(cx, cy, 8, 0, Math.PI * 2);
+    ctx.fillStyle = "#ffffff";
+    ctx.fill();
+    ctx.strokeStyle = "#777777";
+    ctx.stroke();
+}
+
+// スタートボタンで3問を選んで回転
+function startRoulette() {
+    if (isSpinning) return;
+
+    // 毎回8問からランダムに3問選択
+    selectedQuestions = [...questions]
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 3);
+
+    // 右側の一覧で選ばれた質問を強調
+    [...questionList.children].forEach(li => {
+        li.classList.toggle(
+            "selected",
+            selectedQuestions.includes(li.textContent)
         );
+    });
 
-        let count = 0;
-        const totalSpins = 25;
+    drawRoulette();
 
-        // 3つの質問だけでルーレットを回す
-        const timer = setInterval(() => {
-            const randomIndex = Math.floor(
-                Math.random() * selectedQuestions.length
-            );
+    isSpinning = true;
+    spinButton.disabled = true;
+    result.textContent = "回転中...";
 
-            roulette.textContent = selectedQuestions[randomIndex];
-            count++;
+    // ランダムに当選する質問を決める
+    const winnerIndex = Math.floor(
+        Math.random() * selectedQuestions.length
+    );
 
-            if (count >= totalSpins) {
-                clearInterval(timer);
+    const slice = (Math.PI * 2) / selectedQuestions.length;
 
-                roulette.textContent = selectedQuestions[winnerIndex];
-                result.textContent =
-                    "当たり！ " + selectedQuestions[winnerIndex];
+    // 矢印は上向き。選ばれた扇形の中心が上に来る角度
+    const targetAngle =
+        -Math.PI / 2 - (winnerIndex + 0.5) * slice;
 
-                isSpinning = false;
-                spinButton.disabled = false;
-            }
-        }, 100);
+    // 現在角度から、何周かした後に当たりの角度で止める
+    const normalizedTarget =
+        ((targetAngle % (Math.PI * 2)) + Math.PI * 2) %
+        (Math.PI * 2);
+
+    const normalizedCurrent =
+        ((angle % (Math.PI * 2)) + Math.PI * 2) %
+        (Math.PI * 2);
+
+    const extraTurns = 6 * Math.PI * 2;
+    const rotation =
+        extraTurns +
+        ((normalizedTarget - normalizedCurrent + Math.PI * 2) %
+        (Math.PI * 2));
+
+    const startAngle = angle;
+    const endAngle = angle + rotation;
+    const duration = 4000;
+    const startTime = performance.now();
+
+    function animate(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+
+        // 徐々に減速する
+        const eased = 1 - Math.pow(1 - progress, 4);
+        angle = startAngle + rotation * eased;
+
+        drawRoulette();
+
+        if (progress < 1) {
+            requestAnimationFrame(animate);
+        } else {
+            angle = endAngle;
+            drawRoulette();
+
+            result.textContent =
+                "結果：" + selectedQuestions[winnerIndex];
+
+            isSpinning = false;
+            spinButton.disabled = false;
+        }
     }
 
-    // ページを開いたときに表示
-    showQuestions();
+    requestAnimationFrame(animate);
+}
+
+// 最初は灰色の円を表示
+drawRoulette();
 </script>
+```
 
 </body>
 </html>
