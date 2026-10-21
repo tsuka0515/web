@@ -352,6 +352,27 @@
     flex: 0 0 300px;
     margin: 0;
 }
+
+.roulette-container {
+    position: relative;
+    width: 400px;
+    margin: 0 auto;
+}
+
+.roulette-container .arrow {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+
+    color: #ff5c5c;
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 1;
+
+    pointer-events: none;
+}
     </style>
 </head>
 
@@ -388,6 +409,11 @@
     <h1>🎡 環境影響ルーレット</h1>
 
     <div class="main-container">
+
+      <div class="roulette-container">
+    <div class="arrow">▼</div>
+    <canvas id="roulette" width="400" height="400"></canvas>
+</div>
 
     <!-- 左側：ルーレット -->
     <div class="roulette-area">
