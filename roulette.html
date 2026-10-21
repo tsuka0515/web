@@ -353,72 +353,38 @@
     min-width: 0;
 }
 
+.roulette-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+}
 
-/* ルーレットの針全体 */
+.roulette-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+}
+
 .roulette-container .arrow {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-40%, -80%);
+    top: 200px;
+    left: 200px;
+    transform: translate(-50%, -100%);
     z-index: 10;
-    width: 48px;
-    height: 90px;
+    width: 36px;
+    height: 68px;
+    background: #ff3333;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
     pointer-events: none;
 }
 
-/* 黄色い縁取りの三角形 */
-.roulette-container .arrow::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-40%);
-    width: 0;
-    height: 0;
-    border-left: 24px solid transparent;
-    border-right: 24px solid transparent;
-    border-bottom: 84px solid #d4d000;
-}
-
-/* 内側の黒い三角形 */
 .roulette-container .arrow::after {
     content: "";
     position: absolute;
-    top: 7px;
-    left: 50%;
-    transform: translateX(-40%);
-    width: 0;
-    height: 0;
-    border-left: 17px solid transparent;
-    border-right: 17px solid transparent;
-    border-bottom: 66px solid #222222;
+    inset: 5px 4px 3px;
+    background: #ffffff;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
 }
-
-/* 中央の黒い円 */
-.roulette-container .needle-circle {
-    position: absolute;
-    top: 65px;
-    left: 50%;
-    transform: translateX(-40%);
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: #222222;
-    border: 3px solid #b8b500;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* 中央の黄色い円 */
-.roulette-container .needle-center {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #d9d500;
-    border: 3px solid #fff7a0;
-}
-
 
 .question-area {
     flex: 0 0 300px;
