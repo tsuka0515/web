@@ -359,16 +359,24 @@
     height: 400px;
 }
 
+.roulette-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+}
+
 .roulette-container .arrow {
     position: absolute;
-    top: 8px;
-    left: 40%;
-    transform: translateX(-50%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 10;
+
     color: #ff3333;
     font-size: 32px;
     font-weight: bold;
     line-height: 1;
+
     pointer-events: none;
 }
 
@@ -418,7 +426,7 @@
     <div class="roulette-container">
 
         <!-- ルーレット内側の固定矢印 -->
-        <div class="arrow">▼</div>
+        <div class="arrow">◀</div>
 
         <canvas id="roulette" width="400" height="400"></canvas>
     </div>
