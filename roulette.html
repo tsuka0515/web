@@ -313,14 +313,79 @@
     border-color:var(--blue);
 }
 
-.arrow {
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 40px;
-    color: #e85d5d;
-    z-index: 2;
+/* ルーレットと質問一覧を横並びにする */
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 30px auto;
+}
+
+/* 左側のルーレット */
+.roulette-area {
+    flex: 0 1 400px;
+    text-align: center;
+}
+
+/* ルーレットの大きさを維持 */
+.roulette-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.roulette-container canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* 右側の質問一覧 */
+.question-area {
+    flex: 0 0 300px;
+    box-sizing: border-box;
+    background: white;
+    border: 3px solid #f0cf85;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: left;
+    margin: 0;
+}
+
+.question-area h2 {
+    color: #d69a38;
+    font-size: 20px;
+    margin-top: 0;
+}
+
+#questionList {
+    padding-left: 25px;
+    line-height: 1.8;
+}
+
+#questionList li.selected {
+    color: #e58b45;
+    font-weight: bold;
+}
+
+/* 画面が狭いときは縦並び */
+@media (max-width: 700px) {
+    .main-container {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .roulette-area {
+        width: 100%;
+    }
+
+    .question-area {
+        width: 100%;
+        max-width: 400px;
+        flex-basis: auto;
+    }
 }
 
     </style>
