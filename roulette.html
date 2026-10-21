@@ -369,15 +369,21 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -100%);
     z-index: 10;
-
-    color: #ff3333;
-    font-size: 32px;
-    font-weight: bold;
-    line-height: 1;
-
+    width: 36px;
+    height: 68px;
+    background: #ff3333;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
     pointer-events: none;
+}
+
+.roulette-container .arrow::after {
+    content: "";
+    position: absolute;
+    inset: 5px 4px 3px;
+    background: #ffffff;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
 }
 
 .question-area {
@@ -426,7 +432,7 @@
     <div class="roulette-container">
 
         <!-- ルーレット内側の固定矢印 -->
-        <div class="arrow">▼</div>
+        <div class="arrow" aria-hidden="true"></div>
 
         <canvas id="roulette" width="400" height="400"></canvas>
     </div>
@@ -488,13 +494,14 @@ function drawRoulette() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     if (selectedQuestions.length === 0) {
-        ctx.beginPath();
-        ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-        ctx.fillStyle = "#eeeeee";
-        ctx.fill();
-        ctx.strokeStyle = "#888888";
-        ctx.lineWidth = 3;
-        ctx.stroke();
+// 中心の円 〇
+ctx.beginPath();
+ctx.arc(cx, cy, 8, 0, Math.PI * 2);
+ctx.fillStyle = "#ffffff";
+ctx.fill();
+ctx.strokeStyle = "#777777";
+ctx.lineWidth = 2;
+ctx.stroke();
 
         ctx.fillStyle = "#444444";
         ctx.font = "bold 20px sans-serif";
@@ -594,9 +601,9 @@ function startRoulette() {
 
     const slice = (Math.PI * 2) / selectedQuestions.length;
 
-    // 矢印は上向き。選ばれた扇形の中心が上に来る角度
-    const targetAngle =
-        -Math.PI / 2 - (winnerIndex + 0.5) * slice;
+    // 描画時の扇形中心は angle + (winnerIndex + 0.5) * slice - π/2。
+    // 固定矢印の方向（12時＝-π/2）に合わせるため、開始位置の補正は相殺する。
+    const targetAngle = -(winnerIndex + 0.5) * slice;
 
     // 現在角度から、何周かした後に当たりの角度で止める
     const normalizedTarget =
