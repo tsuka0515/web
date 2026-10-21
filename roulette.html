@@ -358,18 +358,28 @@
 
     <h1>🎡 環境影響ルーレット</h1>
 
-    <div class="roulette-container">
-    <div class="arrow"></div>
-    <canvas id="roulette" width="400" height="400"></canvas>
-</div>
+    <div class="main-container">
 
-<button id="spinButton" onclick="startRoulette()">スタート！</button>
+    <!-- 左側：ルーレット -->
+    <div class="roulette-area">
+        <div class="roulette-container">
+            <div class="arrow"></div>
+            <canvas id="roulette" width="400" height="400"></canvas>
+        </div>
 
-<div id="result">結果：？</div>
+        <button id="spinButton" onclick="startRoulette()">
+            スタート！
+        </button>
 
-<div class="question-area">
-    <h2>質問一覧（全8問）</h2>
-    <ol id="questionList"></ol>
+        <div id="result">結果：？</div>
+    </div>
+
+    <!-- 右側：質問一覧 -->
+    <div class="question-area">
+        <h2>質問一覧（全8問）</h2>
+        <ol id="questionList"></ol>
+    </div>
+
 </div>
 
 
