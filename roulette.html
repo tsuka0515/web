@@ -332,8 +332,26 @@
 .question-area {
     flex: 0 0 300px;
     margin: 0;
+}.main-container {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 30px auto;
 }
 
+.roulette-area {
+    flex: 0 1 400px;
+    min-width: 0;
+}
+
+.question-area {
+    flex: 0 0 300px;
+    margin: 0;
+}
     </style>
 </head>
 
@@ -392,6 +410,9 @@
     </div>
 
 </div>
+
+
+    
 <script>
 const questions = [
     "a",
