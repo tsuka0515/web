@@ -488,24 +488,13 @@ function drawRoulette() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     if (selectedQuestions.length === 0) {
-        // 左向きの三角形 ◀
-ctx.beginPath();
-ctx.moveTo(cx - 8, cy);
-ctx.lineTo(cx - 35, cy - 15);
-ctx.lineTo(cx - 35, cy + 15);
-ctx.closePath();
-
-ctx.fillStyle = "#ff3333";
-ctx.fill();
-
-// 中心の円 〇
-ctx.beginPath();
-ctx.arc(cx, cy, 8, 0, Math.PI * 2);
-ctx.fillStyle = "#ffffff";
-ctx.fill();
-ctx.strokeStyle = "#777777";
-ctx.lineWidth = 2;
-ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+        ctx.fillStyle = "#eeeeee";
+        ctx.fill();
+        ctx.strokeStyle = "#888888";
+        ctx.lineWidth = 3;
+        ctx.stroke();
 
         ctx.fillStyle = "#444444";
         ctx.font = "bold 20px sans-serif";
