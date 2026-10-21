@@ -348,30 +348,34 @@
     min-width: 0;
 }
 
-.question-area {
-    flex: 0 0 300px;
-    margin: 0;
+.roulette-area {
+    flex: 0 1 400px;
+    min-width: 0;
 }
 
+/* ここから下に追加！ */
 .roulette-container {
     position: relative;
     width: 400px;
-    margin: 0 auto;
+    height: 400px;
 }
 
 .roulette-container .arrow {
     position: absolute;
-    top: -10px;
+    top: 8px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
-
-    color: #ff5c5c;
-    font-size: 36px;
+    color: #ff3333;
+    font-size: 32px;
     font-weight: bold;
     line-height: 1;
-
     pointer-events: none;
+}
+
+.question-area {
+    flex: 0 0 300px;
+    margin: 0;
 }
     </style>
 </head>
@@ -410,30 +414,28 @@
 
     <div class="main-container">
 
-      <div class="roulette-container">
-    <div class="arrow">▼</div>
-    <canvas id="roulette" width="400" height="400"></canvas>
-</div>
-
     <!-- 左側：ルーレット -->
     <div class="roulette-area">
-        <div class="roulette-container">
-            <div class="arrow"></div>
-            <canvas id="roulette" width="400" height="400"></canvas>
-        </div>
+    <div class="roulette-container">
 
-        <button id="spinButton" onclick="startRoulette()">
-            スタート！
-        </button>
+        <!-- ルーレット内側の固定矢印 -->
+        <div class="arrow">▼</div>
 
-        <div id="result">結果：？</div>
+        <canvas id="roulette" width="400" height="400"></canvas>
     </div>
 
-    <!-- 右側：質問一覧 -->
-    <div class="question-area">
-        <h2>質問一覧（全8問）</h2>
-        <ol id="questionList"></ol>
-    </div>
+    <button id="spinButton" onclick="startRoulette()">
+        スタート！
+    </button>
+
+    <div id="result">結果：？</div>
+</div>
+
+<!-- 右側：質問一覧 -->
+<div class="question-area">
+    <h2>質問一覧（全8問）</h2>
+    <ol id="questionList"></ol>
+</div>
 
 </div>
 
