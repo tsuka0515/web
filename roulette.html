@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>環境影響ルーレット</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -445,6 +446,91 @@
     flex: 0 0 300px;
     margin: 0;
 }
+
+
+/* スマホで見たときだけ縦並びにする */
+@media screen and (max-width: 600px) {
+
+    /* 画面横へのはみ出しを防ぐ */
+    html,
+    body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    body {
+        box-sizing: border-box;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    /* ルーレットと質問一覧を縦に並べる */
+    .main-container {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center;
+        width: 100%;
+        max-width: 100%;
+        gap: 24px;
+    }
+
+    /* ルーレットのエリア */
+    .roulette-area {
+        width: 100%;
+        max-width: 400px;
+        min-width: 0;
+        flex: none;
+    }
+
+    /* 質問一覧をルーレットの下に配置 */
+    .question-area {
+        width: 100%;
+        max-width: 400px;
+        min-width: 0;
+        flex: none;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    /* ルーレットをスマホの画面幅に合わせる */
+    .roulette-container {
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        margin: 0 auto;
+    }
+
+    #roulette {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    /* 見出しや質問文がはみ出さないようにする */
+    h1,
+    h2,
+    .question-area,
+    #questionList li {
+        overflow-wrap: anywhere;
+        word-break: normal;
+    }
+
+    /* ボタンをスマホで押しやすくする */
+    button,
+    select {
+        max-width: 100%;
+        min-height: 44px;
+        box-sizing: border-box;
+    }
+
+    #spinButton {
+        display: block;
+        max-width: 100%;
+        margin: 16px auto;
+    }
+}
+
     </style>
 </head>
 
