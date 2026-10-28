@@ -347,6 +347,47 @@ summary {
             line-height: 1.8;
         }
 
+select, button, .back-btn, .roulette-btn {
+      height: 44px;
+      padding: 4px 10px;
+    }
+  }
+
+  select, button, .back-btn{
+    font-family:'Zen Maru Gothic', sans-serif;
+    font-size: clamp(14px, 2vw, 17px);
+    font-weight:700;
+    min-width: 90px;
+    height: 50px;
+    padding: 6px 14px;
+    background: #fff;
+    color: var(--ink);
+    border: 3px solid var(--green);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  .back-btn:active{
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 rgba(51,64,74,0.08);
+  }
+
+  .back-btn{ border-color:var(--green); }
+
+
+.fixed-btn-left {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1000;
+  }
+  
 </style>
 </head>
 <body>
@@ -358,26 +399,6 @@ summary {
       <div class="mini-card">♻️</div>
     </div>
     <h1>Wakete</h1>
-
-    <a href="index.html">
-    <button class="index-btn">ホーム</button>
-</a>
-
-<a href="rule.html">
-    <button class="rule-btn">ルール</button>
-
-
-<a href="area.html">
-    <button class="area-btn"><ruby>地域<rt>ちいき</rt></ruby><ruby>選択<rt>せんたく</rt></ruby></button>
-</a>
-
-<a href="q&a.html">
-    <button class="qa-btn">Q&A</button>
-</a>
-
-<a href="roulette.html">
-    <button class="roulette-btn">ルーレット</button>
-</a>
 
 <script>
   const buttons = document.querySelectorAll('.tab-btn');
@@ -392,6 +413,10 @@ summary {
     });
   });
 </script>
+
+<div class="fixed-btn-left">
+ <a href="area.html" class="back-btn">◀ もどる</a>
+  </div>
 
 <div class="qa">
 
