@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>環境影響ルーレット</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -313,14 +314,221 @@
     border-color:var(--blue);
 }
 
-.arrow {
+.main-container {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 30px auto;
+}
+
+.roulette-area {
+    flex: 0 1 400px;
+    min-width: 0;
+}
+
+.question-area {
+    flex: 0 0 300px;
+    margin: 0;
+}.main-container {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 30px auto;
+}
+
+.roulette-area {
+    flex: 0 1 400px;
+    min-width: 0;
+}
+
+.roulette-area {
+    flex: 0 1 400px;
+    min-width: 0;
+}
+
+.roulette-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+}
+
+/* 中央の黒い円 */
+.roulette-container .needle-circle {
     position: absolute;
-    top: -10px;
+    top: 65px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 40px;
-    color: #e85d5d;
-    z-index: 2;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #222222;
+    border: 3px solid #f8f690;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ルーレットの針全体 */
+.roulette-container .arrow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    z-index: 10;
+    width: 45px;
+    height: 90px;
+    pointer-events: none;
+}
+
+/* 黄色い縁取りの三角形 */
+.roulette-container .arrow::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 24px solid transparent;
+    border-right: 24px solid transparent;
+    border-bottom: 84px solid #f8f690;
+}
+
+/* 内側の黒い三角形 */
+.roulette-container .arrow::after {
+    content: "";
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 17px solid transparent;
+    border-right: 17px solid transparent;
+    border-bottom: 66px solid #222222;
+}
+
+/* 中央の黒い円 */
+.roulette-container .needle-circle {
+    position: absolute;
+    top: 65px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #222222;
+    border: 3px solid #f8f690;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 中央の黄色い円 */
+.roulette-container .needle-center {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #f8f690;
+    border: 3px solid #f8f690;
+}
+
+
+.question-area {
+    flex: 0 0 300px;
+    margin: 0;
+}
+
+
+/* スマホで見たときだけ縦並びにする */
+@media screen and (max-width: 600px) {
+
+    /* 画面横へのはみ出しを防ぐ */
+    html,
+    body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    body {
+        box-sizing: border-box;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    /* ルーレットと質問一覧を縦に並べる */
+    .main-container {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center;
+        width: 100%;
+        max-width: 100%;
+        gap: 24px;
+    }
+
+    /* ルーレットのエリア */
+    .roulette-area {
+        width: 100%;
+        max-width: 400px;
+        min-width: 0;
+        flex: none;
+    }
+
+    /* 質問一覧をルーレットの下に配置 */
+    .question-area {
+        width: 100%;
+        max-width: 400px;
+        min-width: 0;
+        flex: none;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    /* ルーレットをスマホの画面幅に合わせる */
+    .roulette-container {
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        margin: 0 auto;
+    }
+
+    #roulette {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    /* 見出しや質問文がはみ出さないようにする */
+    h1,
+    h2,
+    .question-area,
+    #questionList li {
+        overflow-wrap: anywhere;
+        word-break: normal;
+    }
+
+    /* ボタンをスマホで押しやすくする */
+    button,
+    select {
+        max-width: 100%;
+        min-height: 44px;
+        box-sizing: border-box;
+    }
+
+    #spinButton {
+        display: block;
+        max-width: 100%;
+        margin: 16px auto;
+    }
 }
 
     </style>
@@ -334,197 +542,245 @@
       <div class="mini-card">📄</div>
       <div class="mini-card">♻️</div>
     </div>
-    <h1>ゲットペアーズ</h1>
-
-    <a href="index.html">
-    <button class="index-btn">ホーム</button>
-</a>
-
-<a href="rule.html">
-    <button class="rule-btn">ルール</button>
-</a>
-
-<a href="area.html">
-    <button class="area-btn"><ruby>地域<rt>ちいき</rt></ruby><ruby>選択<rt>せんたく</rt></ruby></button>
-</a>
-
-<a href="q&a.html">
-    <button class="qa-btn">Q&A</button>
-</a>
-
-<a href="roulette.html">
-    <button class="roulette-btn">ルーレット</button>
-</a>
+    <h1>Wakete</h1>
 
     <h1>🎡 環境影響ルーレット</h1>
 
+    <div class="main-container">
+
+    <!-- 左側：ルーレット -->
+    <div class="roulette-area">
     <div class="roulette-container">
-        <div class="arrow"></div>
+
+       
+<!-- ルーレット内側の固定針 -->
+<div class="arrow" aria-hidden="true">
+    <div class="needle-circle">
+        <div class="needle-center"></div>
+    </div>
+</div>
+
 
         <canvas id="roulette" width="400" height="400"></canvas>
     </div>
 
-    <button onclick="startRoulette()">スタート！</button>
+    <button id="spinButton" onclick="startRoulette()">
+        スタート！
+    </button>
 
     <div id="result">結果：？</div>
+</div>
+
+<!-- 右側：質問一覧 -->
+<div class="question-area">
+    <h2>質問一覧（全8問）</h2>
+    <ol id="questionList"></ol>
+</div>
+
+</div>
 
 
-    <script>
+    
+<script>
+const questions = [
+    "ごみを減らすにはどうすればよい？",
+    "家でよく出るごみは？",
+    "そのゴミを　海、川、山、町、宇宙に分別せずに捨てたらどうなる？",
+    "フードロスが減らせたらどんな良いことがある？",
+    "ちゃんと分別するとどんな良いことがある？",
+    "今日からできるごみを減らす工夫は？",
+    "ちゃんと分別しないと世界はどうなる？",
+    "危険物を普通ごみとして捨てるとどうなる？"
+];
 
-        // ルーレットの項目
-        const items = [
-            "分別しなかったら世界はどうなるか",
-            "分別したら世界はどうなるか",
-            "ポイ捨てしたらどうなるか"
-        ];
+let selectedQuestions = [];
+let isSpinning = false;
+let angle = 0;
 
-        const canvas = document.getElementById("roulette");
-        const ctx = canvas.getContext("2d");
+const canvas = document.getElementById("roulette");
+const ctx = canvas.getContext("2d");
+const result = document.getElementById("result");
+const spinButton = document.getElementById("spinButton");
+const questionList = document.getElementById("questionList");
 
-        let rotation = 0;
-        let spinning = false;
+const colors = ["#ffcf8b", "#b9e4a5", "#a9d9f5"];
 
-        // ルーレットを描く
-        function drawRoulette() {
+// 右側に8つの質問を表示
+questions.forEach(question => {
+    const li = document.createElement("li");
+    li.textContent = question;
+    questionList.appendChild(li);
+});
 
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
-            const radius = 190;
+// ルーレットを描画
+function drawRoulette() {
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2;
+    const radius = 190;
 
-            const angle = (Math.PI * 2) / items.length;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (selectedQuestions.length === 0) {
+// 中心の円 〇
+ctx.beginPath();
+ctx.arc(cx, cy, 8, 0, Math.PI * 2);
+ctx.fillStyle = "#ffffff";
+ctx.fill();
+ctx.strokeStyle = "#777777";
+ctx.lineWidth = 2;
+ctx.stroke();
 
-            items.forEach((item, i) => {
+        ctx.fillStyle = "#444444";
+        ctx.font = "bold 20px sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("", cx, cy);
+        return;
+    }
 
-                const startAngle = i * angle + rotation;
-                const endAngle = startAngle + angle;
+    const slice = (Math.PI * 2) / selectedQuestions.length;
 
-                // 色
-                const colors = [
-                    "#ffd166",
-                    "#90be6d",
-                    "#4d96ff",
-                    "#ff9f68",
-                    "#ff6b6b",
-                    "#c77dff"
-                ];
+    selectedQuestions.forEach((question, i) => {
+        const start = angle + i * slice - Math.PI / 2;
+        const end = start + slice;
 
-                ctx.beginPath();
-                ctx.moveTo(centerX, centerY);
-                ctx.arc(
-                    centerX,
-                    centerY,
-                    radius,
-                    startAngle,
-                    endAngle
-                );
-                ctx.closePath();
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.arc(cx, cy, radius, start, end);
+        ctx.closePath();
+        ctx.fillStyle = colors[i % colors.length];
+        ctx.fill();
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 3;
+        ctx.stroke();
 
-                ctx.fillStyle = colors[i % colors.length];
-                ctx.fill();
+        // 質問の文字を扇形の中に表示
+        const mid = start + slice / 2;
+        const textRadius = radius * 0.58;
+        const tx = cx + Math.cos(mid) * textRadius;
+        const ty = cy + Math.sin(mid) * textRadius;
 
-                ctx.strokeStyle = "white";
-                ctx.lineWidth = 4;
-                ctx.stroke();
+        ctx.save();
+        ctx.translate(tx, ty);
 
-
-                // 文字
-                ctx.save();
-
-                ctx.translate(centerX, centerY);
-                ctx.rotate(startAngle + angle / 2);
-
-                ctx.fillStyle = "#333";
-                    ctx.textAlign = "center";
-                    // 文字数に合わせて文字を小さくする
-                    let fontSize = 16;
-
-                    if (item.length >= 7) {
-                        fontSize = 12;
-                    } else if (item.length >= 5) {
-                        fontSize = 14;
-                }
-
-                ctx.font = `bold ${fontSize}px sans-serif`;
-
-                ctx.fillText(item, radius * 0.55, 5);
-                ctx.restore();
-            });
+        let textAngle = mid + Math.PI / 2;
+        if (Math.cos(mid) < 0) {
+            textAngle += Math.PI;
         }
+        ctx.rotate(textAngle);
 
+        ctx.fillStyle = "#333333";
+        ctx.font = "bold 14px sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
 
-        // ルーレットを回す
-        function startRoulette() {
+        // 長い質問は折り返して表示
+        const maxWidth = 105;
+        const words = question.match(/.{1,8}/g) || [question];
+        words.forEach((line, lineIndex) => {
+            ctx.fillText(
+                line,
+                0,
+                (lineIndex - (words.length - 1) / 2) * 18,
+                maxWidth
+            );
+        });
 
-            if (spinning) return;
+        ctx.restore();
+    });
 
-            spinning = true;
+    // 中心の円
+    ctx.beginPath();
+    ctx.arc(cx, cy, 8, 0, Math.PI * 2);
+    ctx.fillStyle = "#ffffff";
+    ctx.fill();
+    ctx.strokeStyle = "#777777";
+    ctx.stroke();
+}
 
-            document.getElementById("result").textContent = "回転中……";
+// スタートボタンで3問を選んで回転
+function startRoulette() {
+    if (isSpinning) return;
 
-            const startRotation = rotation;
+    // 毎回8問からランダムに3問選択
+    selectedQuestions = [...questions]
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 3);
 
-            // 何回転するか
-            const spinAmount =
-                Math.PI * 2 * (5 + Math.random() * 3);
+    // 右側の一覧で選ばれた質問を強調
+    [...questionList.children].forEach(li => {
+        li.classList.toggle(
+            "selected",
+            selectedQuestions.includes(li.textContent)
+        );
+    });
 
-            const duration = 3000;
-            const startTime = performance.now();
+    drawRoulette();
 
+    isSpinning = true;
+    spinButton.disabled = true;
+    result.textContent = "回転中...";
 
-            function animate(currentTime) {
+    // ランダムに当選する質問を決める
+    const winnerIndex = Math.floor(
+        Math.random() * selectedQuestions.length
+    );
 
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
+    const slice = (Math.PI * 2) / selectedQuestions.length;
 
-                // ゆっくり止まる
-                const easeOut = 1 - Math.pow(1 - progress, 3);
+    // 描画時の扇形中心は angle + (winnerIndex + 0.5) * slice - π/2。
+    // 固定矢印の方向（12時＝-π/2）に合わせるため、開始位置の補正は相殺する。
+    const targetAngle = -(winnerIndex + 0.5) * slice;
 
-                rotation =
-                    startRotation +
-                    spinAmount * easeOut;
+    // 現在角度から、何周かした後に当たりの角度で止める
+    const normalizedTarget =
+        ((targetAngle % (Math.PI * 2)) + Math.PI * 2) %
+        (Math.PI * 2);
 
-                drawRoulette();
+    const normalizedCurrent =
+        ((angle % (Math.PI * 2)) + Math.PI * 2) %
+        (Math.PI * 2);
 
-                if (progress < 1) {
+    const extraTurns = 6 * Math.PI * 2;
+    const rotation =
+        extraTurns +
+        ((normalizedTarget - normalizedCurrent + Math.PI * 2) %
+        (Math.PI * 2));
 
-                    requestAnimationFrame(animate);
+    const startAngle = angle;
+    const endAngle = angle + rotation;
+    const duration = 4000;
+    const startTime = performance.now();
 
-                } else {
+    function animate(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
 
-                    spinning = false;
+        // 徐々に減速する
+        const eased = 1 - Math.pow(1 - progress, 4);
+        angle = startAngle + rotation * eased;
 
-                    showResult();
-                }
-            }
-
-            requestAnimationFrame(animate);
-        }
-
-
-        // 結果を表示
-        function showResult() {
-
-            const angle = (Math.PI * 2) / items.length;
-
-            // 上の矢印が指している位置
-            let normalized =
-                ((-rotation % (Math.PI * 2)) + Math.PI * 2)
-                % (Math.PI * 2);
-
-            const index =
-                Math.floor(normalized / angle);
-
-            document.getElementById("result").textContent =
-                "結果： " + items[index];
-        }
-
-
-        // 最初に描画
         drawRoulette();
 
-    </script>
+        if (progress < 1) {
+            requestAnimationFrame(animate);
+        } else {
+            angle = endAngle;
+            drawRoulette();
+
+            result.textContent =
+                "結果：" + selectedQuestions[winnerIndex];
+
+            isSpinning = false;
+            spinButton.disabled = false;
+        }
+    }
+
+    requestAnimationFrame(animate);
+}
+
+// 最初は灰色の円を表示
+drawRoulette();
+</script>
 
 </body>
 </html>
