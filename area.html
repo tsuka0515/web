@@ -10,291 +10,312 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=BIZ+UDPGothic:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-  .hidden {
-    display: none !important;
-  }
+:root {
+  --cream: #FFF9EE;
+  --card: #FFFFFF;
+  --ink: #33404A;
+  --ink-soft: #6B7680;
+  --green: #3FA65C;
+  --green-dark: #2F8B49;
+  --green-bg: #E5F6E9;
+  --yellow: #F5B93D;
+  --yellow-bg: #FFF4DC;
+  --red: #EF5B4E;
+  --red-bg: #FDE6E3;
+  --blue: #3E92CC;
+  --blue-bg: #E4F1FA;
+  --shadow: 0 6px 0 rgba(51,64,74,0.08),
+            0 10px 24px rgba(51,64,74,0.08);
+}
 
-  :root {
-    --cream: #FFF9EE;
-    --card: #FFFFFF;
-    --ink: #33404A;
-    --ink-soft: #6B7680;
-    --green: #3FA65C;
-    --green-bg: #E5F6E9;
-    --yellow: #F5B93D;
-    --yellow-bg: #FFF4DC;
-    --red: #EF5B4E;
-    --red-bg: #FDE6E3;
-    --blue: #3E92CC;
-    --blue-bg: #E4F1FA;
-    --yellowgreen: #81c72c;
-    --shadow: 0 6px 0 rgba(51,64,74,0.08),
-              0 10px 24px rgba(51,64,74,0.08);
-  }
+* {
+  box-sizing: border-box;
+}
 
-  * {
-    box-sizing: border-box;
-  }
+html {
+  scroll-behavior: smooth;
+}
 
-  html {
-    scroll-behavior: smooth;
-  }
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding-bottom: 80px;
+  background:
+    radial-gradient(circle at 8% 12%, var(--green-bg) 0%, transparent 40%),
+    radial-gradient(circle at 92% 18%, var(--red-bg) 0%, transparent 38%),
+    radial-gradient(circle at 50% 90%, var(--yellow-bg) 0%, transparent 45%),
+    var(--cream);
+  color: var(--ink);
+  font-family: 'BIZ UDPGothic', 'Hiragino Maru Gothic ProN',
+               'Yu Gothic', sans-serif;
+  font-size: 18px;
+  line-height: 1.9;
+}
 
+.hidden {
+  display: none !important;
+}
+
+ruby rt {
+  font-size: 0.55em;
+  color: var(--ink-soft);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* 戻るボタン */
+.fixed-btn-left {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1000;
+}
+
+/* タイトル部分 */
+.hero {
+  text-align: center;
+  padding: 100px 20px 40px;
+  position: relative;
+}
+
+.hero-cards {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.mini-card {
+  width: 52px;
+  height: 70px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  box-shadow: var(--shadow);
+  transform: rotate(var(--r, 0deg));
+  background: var(--card);
+  border: 3px solid var(--c, var(--ink));
+}
+
+.mini-card:nth-child(1) {
+  --r: -10deg;
+  --c: var(--green);
+}
+
+.mini-card:nth-child(2) {
+  --r: 4deg;
+  --c: var(--yellow);
+  margin-top: -8px;
+}
+
+.mini-card:nth-child(3) {
+  --r: 12deg;
+  --c: var(--red);
+}
+
+h1 {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-weight: 900;
+  font-size: clamp(30px, 7vw, 44px);
+  margin: 0 0 8px;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+
+/* 戻るボタン */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 6px 14px;
+  background: #fff;
+  color: var(--ink);
+  border: 3px solid var(--green);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+}
+
+.back-btn:active {
+  transform: translateY(2px);
+}
+
+/* 地域選択欄 */
+#city,
+#ward {
+  width: min(280px, 90vw);
+  height: 60px;
+  margin-top: 30px;
+  padding: 8px 14px;
+  border: 3px solid var(--blue);
+  border-radius: 14px;
+  background: #fff;
+  color: var(--ink);
+  box-shadow: var(--shadow);
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* 検索ボタンの配置 */
+.next-area {
+  display: flex;
+  justify-content: center;
+  margin: 40px auto 30px;
+  padding: 0 20px;
+}
+
+/* 緑色の「つぎへ」ボタンと同じデザイン */
+.next-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 280px;
+  min-height: 76px;
+  padding: 16px 28px;
+  background: var(--green);
+  color: #fff;
+  border: 4px solid var(--green-dark);
+  border-radius: 22px;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: 26px;
+  font-weight: 900;
+  box-shadow: 0 7px 0 var(--green-dark);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.next-btn:hover {
+  transform: translateY(3px);
+  box-shadow: 0 4px 0 var(--green-dark);
+}
+
+.next-btn:active {
+  transform: translateY(6px);
+  box-shadow: 0 1px 0 var(--green-dark);
+}
+
+.next-btn:focus-visible,
+.back-btn:focus-visible,
+#city:focus-visible,
+#ward:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 4px;
+}
+
+/* 選択した住所 */
+#result {
+  margin: 24px auto 0;
+  padding: 0 12px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+/* スマートフォン対応 */
+@media (max-width: 600px) {
   body {
-    margin: 0;
-    background:
-      radial-gradient(circle at 8% 12%, var(--green-bg) 0%, transparent 40%),
-      radial-gradient(circle at 92% 18%, var(--red-bg) 0%, transparent 38%),
-      radial-gradient(circle at 50% 90%, var(--yellow-bg) 0%, transparent 45%),
-      var(--cream);
-    color: var(--ink);
-    font-family: 'BIZ UDPGothic', 'Hiragino Maru Gothic ProN',
-                 'Yu Gothic', sans-serif;
-    font-size: 18px;
-    line-height: 1.9;
-    padding-bottom: 80px;
-    min-height: 100vh;
+    font-size: 16px;
   }
 
-  ruby rt {
-    font-size: 0.55em;
-    color: var(--ink-soft);
-    font-weight: 400;
-    letter-spacing: 0;
-  }
-
-  .wrap {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-
-  /* 戻るボタン */
-  .fixed-btn-left {
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 1000;
-  }
-
-  /* タイトル部分 */
   .hero {
-    text-align: center;
-    padding: 100px 20px 40px;
-    position: relative;
+    padding: 100px 14px 30px;
   }
 
-  .hero-cards {
-    display: flex;
-    justify-content: center;
-    gap: 14px;
-    margin-bottom: 18px;
-  }
-
-  .mini-card {
-    width: 52px;
-    height: 70px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 26px;
-    box-shadow: var(--shadow);
-    transform: rotate(var(--r, 0deg));
-    background: var(--card);
-    border: 3px solid var(--c, var(--ink));
-  }
-
-  .mini-card:nth-child(1) {
-    --r: -10deg;
-    --c: var(--green);
-  }
-
-  .mini-card:nth-child(2) {
-    --r: 4deg;
-    --c: var(--yellow);
-    margin-top: -8px;
-  }
-
-  .mini-card:nth-child(3) {
-    --r: 12deg;
-    --c: var(--red);
-  }
-
-  h1 {
-    font-family: 'Zen Maru Gothic', sans-serif;
-    font-weight: 900;
-    font-size: clamp(30px, 7vw, 44px);
-    margin: 0 0 8px;
-    color: var(--ink);
-    letter-spacing: 0.02em;
-  }
-
-  .subtitle {
-    font-family: 'Zen Maru Gothic', sans-serif;
-    font-weight: 700;
-    color: var(--ink-soft);
-    font-size: 17px;
-    margin: 0;
-    letter-spacing: 0.1em;
-  }
-
-  /* 共通ボタン */
-  select,
-  button,
-  .back-btn,
-  .next-btn {
-    font-family: 'Zen Maru Gothic', sans-serif;
-    font-size: clamp(14px, 2vw, 17px);
-    font-weight: 700;
-    min-width: 90px;
-    min-height: 50px;
-    padding: 6px 14px;
-    background: #fff;
-    color: var(--ink);
-    border: 3px solid var(--green);
-    border-radius: 14px;
-    box-shadow: var(--shadow);
-    cursor: pointer;
-    transition: 0.2s;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-  }
-
-  select:focus-visible,
-  button:focus-visible,
-  .back-btn:focus-visible {
-    outline: 3px solid var(--ink);
-    outline-offset: 3px;
-  }
-
-  button:hover,
-  .back-btn:hover {
-    transform: translateY(-2px);
-  }
-
-  button:active,
-  .back-btn:active {
-    transform: translateY(2px);
-    box-shadow: 0 2px 0 rgba(51,64,74,0.08);
+  .fixed-btn-left {
+    top: 10px;
+    left: 10px;
   }
 
   .back-btn {
-    border-color: var(--green);
+    min-height: 44px;
+    padding: 6px 10px;
   }
 
-  /* 地域選択欄 */
   #city,
   #ward {
-    width: min(280px, 90vw);
-    height: 60px;
+    height: 54px;
+    margin-top: 22px;
+    font-size: 16px;
+  }
+
+  .next-area {
     margin-top: 30px;
-    border-color: var(--blue);
-    padding: 8px 14px;
+    padding: 0 16px;
   }
 
-  #searchBtn {
-    width: 180px;
-    min-height: 60px;
-    margin-top: 30px;
-    border-color: var(--yellowgreen);
-    background: #fff;
+  .next-btn {
+    width: 100%;
+    max-width: 320px;
+    min-height: 68px;
+    font-size: 23px;
   }
+}
 
-  #result {
-    margin: 24px auto 0;
-    padding: 0 12px;
-    font-weight: 700;
-    overflow-wrap: anywhere;
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    scroll-behavior: auto !important;
   }
-
-  @media (max-width: 768px) {
-    body {
-      font-size: 16px;
-    }
-
-    .hero {
-      padding: 100px 14px 30px;
-    }
-
-    .fixed-btn-left {
-      top: 10px;
-      left: 10px;
-    }
-
-    select,
-    button,
-    .back-btn {
-      min-height: 44px;
-      padding: 6px 10px;
-    }
-
-    #city,
-    #ward {
-      height: 54px;
-      margin-top: 22px;
-    }
-
-    #searchBtn {
-      height: 54px;
-      margin-top: 24px;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    * {
-      transition: none !important;
-      scroll-behavior: auto !important;
-    }
-  }
+}
 </style>
 </head>
 
 <body>
 
-  <!-- 戻るボタン -->
-  <div class="fixed-btn-left">
-    <a href="rule.html" class="back-btn">◀ もどる</a>
+<!-- 戻るボタン -->
+<div class="fixed-btn-left">
+  <a href="rule.html" class="back-btn">◀ もどる</a>
+</div>
+
+<!-- タイトルと地域選択 -->
+<div class="hero">
+
+  <div class="hero-cards">
+    <div class="mini-card">🥫</div>
+    <div class="mini-card">📄</div>
+    <div class="mini-card">♻️</div>
   </div>
 
-  <!-- タイトル -->
-  <div class="hero">
+  <h1>Wakete</h1>
 
-    <div class="hero-cards">
-      <div class="mini-card">🥫</div>
-      <div class="mini-card">📄</div>
-      <div class="mini-card">♻️</div>
-    </div>
-
-    <h1>Wakete</h1>
-
-    <!-- 市町村選択 -->
-    <div>
-      <select id="city" aria-label="市町村を選択">
-        <option value="">地域を選択</option>
-      </select>
-    </div>
-
-    <!-- 区選択：最初は非表示 -->
-    <div>
-      <select id="ward" class="hidden" aria-label="区を選択">
-        <option value="">区を選択</option>
-      </select>
-    </div>
-
-    <!-- 検索ボタン：最初は非表示 -->
-    <div>
-      <button id="searchBtn" class="hidden" type="button">
-        <ruby>検索<rt>けんさく</rt></ruby>
-      </button>
-    </div>
-
-    <!-- 選択した住所 -->
-    <p id="result" aria-live="polite"></p>
-
+  <!-- 市町村選択 -->
+  <div>
+    <select id="city" aria-label="市町村を選択">
+      <option value="">地域を選択</option>
+    </select>
   </div>
+
+  <!-- 区選択：最初は非表示 -->
+  <div>
+    <select id="ward" class="hidden" aria-label="区を選択">
+      <option value="">区を選択</option>
+    </select>
+  </div>
+
+  <!-- 検索ボタン：最初は非表示 -->
+  <div class="next-area hidden" id="searchArea">
+    <button id="searchBtn" type="button" class="next-btn">
+      検索 ▶
+    </button>
+  </div>
+
+  <!-- 選択した住所 -->
+  <p id="result" aria-live="polite"></p>
+
+</div>
 
 <script>
 /* =========================
@@ -311,30 +332,11 @@ const osaka = {
   "大阪狭山市": [],
 
   "大阪市": [
-    "北区",
-    "都島区",
-    "福島区",
-    "此花区",
-    "中央区",
-    "西区",
-    "港区",
-    "大正区",
-    "天王寺区",
-    "浪速区",
-    "西淀川区",
-    "淀川区",
-    "東淀川区",
-    "東成区",
-    "生野区",
-    "旭区",
-    "城東区",
-    "鶴見区",
-    "阿倍野区",
-    "住之江区",
-    "住吉区",
-    "東住吉区",
-    "平野区",
-    "西成区"
+    "北区", "都島区", "福島区", "此花区", "中央区",
+    "西区", "港区", "大正区", "天王寺区", "浪速区",
+    "西淀川区", "淀川区", "東淀川区", "東成区", "生野区",
+    "旭区", "城東区", "鶴見区", "阿倍野区", "住之江区",
+    "住吉区", "東住吉区", "平野区", "西成区"
   ],
 
   "貝塚市": [],
@@ -345,13 +347,8 @@ const osaka = {
   "岸和田市": [],
 
   "堺市": [
-    "堺区",
-    "中区",
-    "東区",
-    "西区",
-    "南区",
-    "北区",
-    "美原区"
+    "堺区", "中区", "東区", "西区",
+    "南区", "北区", "美原区"
   ],
 
   "吹田市": [],
@@ -373,16 +370,15 @@ const osaka = {
   "八尾市": []
 };
 
-
 /* =========================
    HTML要素の取得
 ========================= */
 
 const citySelect = document.getElementById("city");
 const wardSelect = document.getElementById("ward");
+const searchArea = document.getElementById("searchArea");
 const searchBtn = document.getElementById("searchBtn");
 const result = document.getElementById("result");
-
 
 /* =========================
    市町村の選択肢を作成
@@ -390,20 +386,16 @@ const result = document.getElementById("result");
 
 Object.keys(osaka).forEach(city => {
   const option = document.createElement("option");
-
   option.value = city;
   option.textContent = city;
-
   citySelect.appendChild(option);
 });
-
 
 /* =========================
    市町村が変更されたとき
 ========================= */
 
 citySelect.addEventListener("change", function() {
-
   const city = this.value;
   const wards = osaka[city];
 
@@ -411,7 +403,7 @@ citySelect.addEventListener("change", function() {
   wardSelect.innerHTML = '<option value="">区を選択</option>';
 
   // 検索ボタンと住所表示を初期化
-  searchBtn.classList.add("hidden");
+  searchArea.classList.add("hidden");
   result.textContent = "";
 
   // 区の選択欄もいったん隠す
@@ -423,43 +415,35 @@ citySelect.addEventListener("change", function() {
   }
 
   if (wards.length > 0) {
-
     // 区がある市：区の選択欄を表示
     wardSelect.classList.remove("hidden");
 
     // 区の選択肢を追加
     wards.forEach(ward => {
       const option = document.createElement("option");
-
       option.value = ward;
       option.textContent = ward;
-
       wardSelect.appendChild(option);
     });
 
-    // 区が選ばれるまで検索ボタンは隠したまま
-
+    // 区が選ばれるまで検索ボタンは表示しない
   } else {
-
     // 区がない市：市を選んだ時点で検索ボタンを表示
     result.textContent = "選択住所：" + city;
-
-    searchBtn.classList.remove("hidden");
+    searchArea.classList.remove("hidden");
   }
 });
-
 
 /* =========================
    区が変更されたとき
 ========================= */
 
 wardSelect.addEventListener("change", function() {
-
   const city = citySelect.value;
   const ward = this.value;
 
   // 区が選び直されたら、いったん検索ボタンを隠す
-  searchBtn.classList.add("hidden");
+  searchArea.classList.add("hidden");
   result.textContent = "";
 
   // 区が未選択なら終了
@@ -469,17 +453,14 @@ wardSelect.addEventListener("change", function() {
 
   // 区が選択されたら住所と検索ボタンを表示
   result.textContent = "選択住所：" + city + " " + ward;
-
-  searchBtn.classList.remove("hidden");
+  searchArea.classList.remove("hidden");
 });
-
 
 /* =========================
    地域ごとのページ対応表
 ========================= */
 
 const pageMap = {
-
   // 市町村
   "伊丹市": "pages/itami.html",
   "池田市": "pages/ikeda.html",
@@ -524,6 +505,7 @@ const pageMap = {
   "大阪市-天王寺区": "pages/osakatennoji.html",
   "大阪市-浪速区": "pages/osakananiwa.html",
   "大阪市-西淀川区": "pages/osakanishiyodogawa.html",
+  "大阪市-淀川区": "pages/osakayodogawa.html",
   "大阪市-東淀川区": "pages/osakahigashiyodogawa.html",
   "大阪市-東成区": "pages/osakahigashinari.html",
   "大阪市-生野区": "pages/osakaikuno.html",
@@ -532,6 +514,7 @@ const pageMap = {
   "大阪市-鶴見区": "pages/osakatsurumi.html",
   "大阪市-阿倍野区": "pages/osakaabeno.html",
   "大阪市-住之江区": "pages/osakasuminoe.html",
+  "大阪市-住吉区": "pages/osakasumiyoshi.html",
   "大阪市-東住吉区": "pages/osakahigashisumiyoshi.html",
   "大阪市-平野区": "pages/osakahirano.html",
   "大阪市-西成区": "pages/osakanishinari.html",
@@ -546,13 +529,11 @@ const pageMap = {
   "堺市-美原区": "pages/sakaimihara.html"
 };
 
-
 /* =========================
    検索ボタンが押されたとき
 ========================= */
 
 searchBtn.addEventListener("click", function() {
-
   const city = citySelect.value;
 
   // 市町村が選択されているか確認
@@ -565,7 +546,6 @@ searchBtn.addEventListener("click", function() {
 
   // 区がある市の場合
   if (osaka[city].length > 0) {
-
     const ward = wardSelect.value;
 
     // 区が選択されているか確認
@@ -575,25 +555,18 @@ searchBtn.addEventListener("click", function() {
     }
 
     key = city + "-" + ward;
-
   } else {
-
     // 区がない市の場合
     key = city;
   }
 
   // 対応するページへ移動
   if (pageMap[key]) {
-
     window.location.href = pageMap[key];
-
   } else {
-
     alert("この地域のページはまだ作成されていません。");
-
   }
 });
-
 </script>
 
 </body>
