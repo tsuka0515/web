@@ -455,6 +455,173 @@
     font-size: 18px;
 }
 
+/* =========================
+   スマホ対応（PCのデザインは維持）
+========================= */
+@media screen and (max-width: 600px) {
+
+    html, body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    body {
+        font-size: 16px;
+        line-height: 1.8;
+        padding: 10px 12px 50px;
+    }
+
+    /* 上部のボタン */
+    left, right {
+        display: inline-block;
+        max-width: 49%;
+        vertical-align: top;
+    }
+
+    right {
+        float: right;
+        text-align: right;
+    }
+
+    select, button {
+        width: auto;
+        max-width: 100%;
+        min-height: 40px;
+        height: auto;
+        padding: 8px 12px;
+        font-size: 14px;
+        white-space: normal;
+    }
+
+    /* タイトル */
+    .hero {
+        padding: 28px 4px 24px;
+    }
+
+    .hero-cards {
+        gap: 10px;
+        margin-bottom: 14px;
+    }
+
+    .mini-card {
+        width: 44px;
+        height: 60px;
+        font-size: 23px;
+    }
+
+    h1 {
+        font-size: clamp(24px, 7vw, 34px);
+        line-height: 1.4;
+        overflow-wrap: anywhere;
+    }
+
+    .subtitle {
+        font-size: 14px;
+        line-height: 1.6;
+        letter-spacing: 0.03em;
+    }
+
+    /* 全体の枠 */
+    .wrap,
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+        margin: 20px auto;
+    }
+
+    /* 大きな枠 */
+    .category-box {
+        width: 100%;
+        padding: 38px 16px 22px;
+        margin-top: 42px;
+        border-radius: 18px;
+    }
+
+    .category-box h2 {
+        top: -20px;
+        left: 12px;
+        max-width: calc(100% - 24px);
+        padding: 4px 12px;
+        font-size: 19px;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
+    }
+
+    .category-box ul {
+        padding-left: 22px;
+    }
+
+    .category-box li {
+        margin: 12px 0;
+        padding-left: 2px;
+        font-size: 16px;
+        line-height: 1.7;
+        overflow-wrap: anywhere;
+    }
+
+    /* 下の小さな枠 */
+    .three-boxes {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        width: 100%;
+        margin-top: 28px;
+    }
+
+    .small-box {
+        flex: 1 1 calc(50% - 6px);
+        min-width: 0;
+        max-width: 100%;
+        min-height: 120px;
+        padding: 42px 12px 18px;
+        border-radius: 16px;
+    }
+
+    .small-box h2 {
+        top: -18px;
+        left: 8px;
+        max-width: calc(100% - 16px);
+        padding: 4px 8px;
+        font-size: 16px;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
+    }
+
+    .small-box ul {
+        padding-left: 18px;
+    }
+
+    .small-box li {
+        margin: 10px 0;
+        font-size: 15px;
+        line-height: 1.7;
+        overflow-wrap: anywhere;
+    }
+
+    /* 文字は横書きにして、枠内で折り返す */
+    p, li, h2, h3 {
+        writing-mode: horizontal-tb;
+        overflow-wrap: anywhere;
+    }
+
+}
+
+/* 幅が360px以下のスマホ */
+@media screen and (max-width: 360px) {
+
+    .small-box {
+        flex-basis: 100%;
+    }
+
+    .category-box {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+}
 
 </style>
 </head>
