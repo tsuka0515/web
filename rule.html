@@ -50,6 +50,8 @@
     padding:0 20px;
   }
 
+
+
   /* HERO */
   .hero{
     text-align:center;
@@ -283,7 +285,7 @@
     }
   }
 
-  select, button, .back-btn, .roulette-btn {
+  select, button, .back-btn{
     font-family:'Zen Maru Gothic', sans-serif;
     font-size: clamp(14px, 2vw, 17px);
     font-weight:700;
@@ -303,7 +305,7 @@
     text-decoration: none;
   }
 
-  .back-btn:active, .roulette-btn:active {
+  .back-btn:active{
     transform: translateY(2px);
     box-shadow: 0 2px 0 rgba(51,64,74,0.08);
   }
@@ -318,6 +320,63 @@
     z-index: 1000;
   }
 
+
+/* 次へボタン */
+.next-area {
+    display: flex;
+    justify-content: center;
+    margin: 40px auto 30px;
+    padding: 0 20px;
+}
+
+.next-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    width: 280px;
+    min-height: 76px;
+    padding: 16px 28px;
+
+    background: var(--green);
+    color: #fff;
+    border: 4px solid #2F8B49;
+    border-radius: 22px;
+
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 26px;
+    font-weight: 900;
+    text-decoration: none;
+
+    box-shadow: 0 7px 0 #2F8B49;
+    transition: 0.2s;
+}
+
+.next-btn:hover {
+    transform: translateY(3px);
+    box-shadow: 0 4px 0 #2F8B49;
+}
+
+.next-btn:active {
+    transform: translateY(6px);
+    box-shadow: 0 1px 0 #2F8B49;
+}
+
+/* スマホ表示 */
+@media (max-width: 600px) {
+    .next-area {
+        margin-top: 30px;
+        padding: 0 16px;
+    }
+
+    .next-btn {
+        width: 100%;
+        max-width: 320px;
+        min-height: 68px;
+        font-size: 23px;
+    }
+}
 
 </style>
 </head>
@@ -336,15 +395,29 @@
     <p class="subtitle">あそびかた ルールブック</p>
   </div>
 
-  <div class="wrap">
-    <section class="card objective">
-      <h2>🎯 げーむの もくひょう</h2>
-      <p>
-        <ruby>ごみ<rt></rt></ruby>を<ruby>正<rt>ただ</rt></ruby>しく<ruby>分別<rt>ぶんべつ</rt></ruby>して、「ごみカード」と「ごみの<ruby>種類<rt>しゅるい</rt></ruby>カード」のペア（２まい<ruby>組<rt>ぐみ</rt></ruby>）を作ります。
-        <ruby>獲得<rt>かくとく</rt></ruby>したペアの<ruby>数<rt>かず</rt></ruby>（または<ruby>点数<rt>てんすう</rt></ruby>）をきそって、いちばん多く<ruby>獲得<rt>かくとく</rt></ruby>した人が<strong>勝ち</strong>です。
-      </p>
-    </section>
-  </div>
+  
+<div class="wrap">
+
+  <!-- 1つ目のカード -->
+  <section class="card objective">
+    <h2>🎯 Waketeをはじめるまえに</h2>
+    <p>
+      人数：2～4人<br>
+      時間：分
+    </p>
+  </section>
+
+  <!-- 2つ目のカード -->
+  <section class="card objective">
+    <h2>📋 基本ルール</h2>
+    <p>
+      
+    </p>
+  </section>
+
+</div>
+
+  
 
   <div class="tabs" role="tablist">
     <button class="tab-btn active" id="easy-btn" data-tab="easy" role="tab" aria-selected="true">🟢 イージー版</button>
@@ -455,9 +528,14 @@
 </script>
 <br>
 <center>
-    <a href="area.html">
-        <button class="area-btn">つぎへ</button>
+    
+<div class="next-area">
+    <a href="area.html" class="next-btn">
+        つぎへ ▶
     </a>
+</div>
+
+
 </center>
 
 </body>
