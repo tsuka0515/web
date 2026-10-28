@@ -21,6 +21,7 @@
     --red-bg:#FDE6E3;
     --blue:#3E92CC;
     --blue-bg:#E4F1FA;
+    --orange-bg:#ff840051;
     --shadow: 0 6px 0 rgba(51,64,74,0.08), 0 10px 24px rgba(51,64,74,0.08);
   }
   *{ box-sizing:border-box; }
@@ -34,10 +35,9 @@
       var(--cream);
     color:var(--ink);
     font-family:'BIZ UDPGothic','Hiragino Maru Gothic ProN','Yu Gothic',sans-serif;
-    font-size: clamp(15px, 2.2vw, 18px);
+    font-size:18px;
     line-height:1.9;
     padding-bottom:80px;
-    overflow-x: hidden;
   }
   ruby rt{
     font-size:0.55em;
@@ -46,7 +46,7 @@
     letter-spacing:0;
   }
   .wrap{
-    max-width:1000px;
+    max-width:760px;
     margin:0 auto;
     padding:0 20px;
   }
@@ -54,7 +54,7 @@
   /* HERO */
   .hero{
     text-align:center;
-    padding: clamp(24px, 5vw, 56px) 16px clamp(20px, 4vw, 40px);
+    padding:56px 20px 40px;
     position:relative;
   }
   .hero-cards{
@@ -80,7 +80,7 @@
   h1{
     font-family:'Zen Maru Gothic', sans-serif;
     font-weight:900;
-    font-size:clamp(26px, 6vw, 44px);
+    font-size:clamp(30px, 7vw, 44px);
     margin:0 0 8px;
     color:var(--ink);
     letter-spacing:0.02em;
@@ -264,47 +264,29 @@
 
   ruby{ font-feature-settings:"ruby" 1; }
 
-  /* ナビゲーションエリア・レスポンシブ自動調整 */
+  /* ナビゲーションボタンエリアの折り返し対応 */
   .nav-area {
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 20px;
-    width: 100%;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
+    gap: 12px;
+    margin-top: 15px;
   }
 
-  .nav-area a {
-    text-decoration: none;
-    display: inline-block;
-  }
-
-  select, button{
+  select,button{
     font-family:'Zen Maru Gothic', sans-serif;
-    font-size: clamp(15px, 2.2vw, 18px);
+    font-size:18px;
     font-weight:700;
-    min-width: 110px;
-    height: 56px;
-    padding: 8px 16px;
-    background: #fff;
-    color: var(--ink);
-    border: 3px solid var(--green);
-    border-radius: 14px;
+    min-width:130px;
+    height:60px;
+    padding:10px 16px;
+    background:#fff;
+    color:var(--ink);
+    border:3px solid var(--green);
+    border-radius:14px;
     box-shadow: var(--shadow);
-    cursor: pointer;
-    transition: 0.2s;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  button:active {
-    transform: translateY(2px);
-    box-shadow: 0 2px 0 rgba(51,64,74,0.08);
+    cursor:pointer;
+    transition:0.2s;
   }
 
   .home-btn{ border-color:var(--green); }
@@ -314,20 +296,20 @@
   .roulette-btn{ border-color:#9B51E0; }
 
   .container {
-    width: 92%;
+    width: 90%;
     max-width: 1000px;
-    margin: 40px auto;
+    margin: 50px auto;
   }
 
   /* =====================
-     ごみ分別の枠（自動サイズ伸縮）
+     ごみ分別の枠
   ===================== */
   .category-box {
     position: relative;
-    width: 92%;
+    width: 100%;
     max-width: 1000px;
-    margin: 50px auto 0;
-    padding: 45px 25px 25px;
+    margin: 65px auto 0;
+    padding: 55px 35px 35px;
     background: var(--cream);
     border: 3px solid #8FA36B;
     border-radius: 22px;
@@ -340,49 +322,46 @@
   /* 見出し */
   .category-box h2 {
     position: absolute;
-    top: -22px;
-    left: 20px;
+    top: -25px;
+    left: 35px;
     margin: 0;
-    padding: 4px 16px;
+    padding: 5px 20px;
     background-color: var(--cream);
     color: #33404A;
     font-family: 'Zen Maru Gothic', sans-serif;
-    font-size: clamp(18px, 4vw, 24px);
+    font-size: 24px;
     font-weight: 700;
-    white-space: nowrap;
   }
 
   /* 中身 */
   .category-box ul {
     margin: 0;
-    padding-left: 24px;
+    padding-left: 35px;
   }
 
   /* ゴミの名前 */
   .category-box li {
-    margin: 12px 0;
+    margin: 18px 0;
     padding-left: 5px;
-    font-size: clamp(15px, 2.5vw, 18px);
+    font-size: 18px;
   }
 
   /* =====================
-     下の枠（画面幅に合わせて伸縮＆自動折り返し）
+     下の枠（レスポンシブ対応追加）
   ===================== */
   .three-boxes {
     display: flex;
-    flex-wrap: wrap;
     gap: 20px;
-    margin-top: 35px;
-    width: 100%;
+    margin-top: 40px;
+    flex-wrap: wrap; /* スマホ・タブレットで綺麗に並ぶよう折り返し指定 */
   }
 
   /* 枠 */
   .small-box {
     position: relative;
-    flex: 1 1 240px;
-    min-width: 0;
-    min-height: 160px;
-    padding: 45px 20px 20px;
+    flex: 1 1 220px; /* 画面幅に応じて自動調節 */
+    min-height: 180px;
+    padding: 55px 25px 30px;
     background: var(--cream);
     border: 3px solid #8FA36B;
     border-radius: 22px;
@@ -395,68 +374,406 @@
   /* 見出し */
   .small-box h2 {
     position: absolute;
-    top: -22px;
-    left: 20px;
+    top: -25px;
+    left: 25px;
     margin: 0;
-    padding: 4px 14px;
+    padding: 5px 18px;
     background-color: var(--cream);
     color: #33404A;
     font-family: 'Zen Maru Gothic', sans-serif;
-    font-size: clamp(17px, 3.5vw, 22px);
+    font-size: 22px;
     font-weight: 700;
-    white-space: nowrap;
   }
 
   /* 中身 */
   .small-box ul {
     margin: 0;
-    padding-left: 20px;
+    padding-left: 25px;
   }
 
   /* ゴミの名前 */
   .small-box li {
-    margin: 12px 0;
-    font-size: clamp(15px, 2.5vw, 18px);
+    margin: 18px 0;
+    font-size: 18px;
   }
 
   @media (prefers-reduced-motion: reduce){
     *{ transition:none !important; scroll-behavior:auto !important; }
   }
 
-  /* タブレット・スマホ画面用の最適化調整 */
-  @media (max-width: 768px) {
-    .container, .category-box {
-      width: 94%;
-      margin-top: 40px;
-    }
-    .nav-area {
-      gap: 8px;
-    }
-    select, button {
-      min-width: 95px;
-      height: 50px;
-      padding: 6px 12px;
-    }
-    .three-boxes {
-      gap: 28px;
-    }
-    .small-box {
-      flex: 1 1 100%; /* スマホや縦持ちタブレットでは1列で読みやすく表示 */
-    }
+  @media (max-width:480px){
+    body{ font-size:16.5px; }
+    .card{ padding:20px 18px; }
+    .tab-btn{ font-size:15px; padding:14px 6px;}
+    .category-box, .small-box{ padding-left: 20px; padding-right: 20px; }
   }
 
-  @media (max-width: 480px) {
-    .nav-area a {
-      flex: 1 1 calc(50% - 8px); /* ボタンを2列配置に可変 */
+
+  select,button{
+    font-family:'Zen Maru Gothic', sans-serif;
+    font-size:13px;
+    font-weight:400;
+
+    width:200px;
+    height:40px;
+
+
+
+    background:#fff;
+    color:var(--ink);
+
+    border:3px solid var(--green);
+    border-radius:14px;
+
+    box-shadow: var(--shadow);
+
+    cursor:pointer;
+    transition:0.2s;
+}
+.home-btn{
+    border-color:var(--green);
+}
+
+.rule-btn{
+    border-color:var(--yellow);
+}
+
+.index-btn{
+    border-color:var(--red);
+}
+
+.qa-btn{
+    border-color:var(--blue);
+}
+
+.roulette-btn{
+    border-color:var(--blue);
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 50px auto;
+}
+
+/* =====================
+   ごみ分別の枠
+===================== */
+
+.category-box {
+    position: relative;
+
+    width: 100%;
+    padding: 55px 45px 35px;
+
+    margin-top: 65px;
+
+    background: var(--orange-bg);
+
+    border: 3px solid #8FA36B;
+    border-radius: 22px;
+
+    box-shadow:
+        0 5px 0 rgba(51,64,74,0.08),
+        0 8px 18px rgba(51,64,74,0.12);
+
+    box-sizing: border-box;
+}
+
+
+/* 見出し */
+.category-box h2 {
+    position: absolute;
+
+    top: -25px;
+    left: 35px;
+
+    margin: 0;
+    padding: 5px 20px;
+
+    background-color: var(--cream);
+
+    color: #33404A;
+
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+
+/* 中身 */
+.category-box ul {
+    margin: 0;
+    padding-left: 35px;
+}
+
+
+/* ゴミの名前 */
+.category-box li {
+    margin: 18px 0;
+
+    padding-left: 5px;
+
+    font-size: 18px;
+}
+
+
+/* =====================
+   下の枠
+===================== */
+
+.three-boxes {
+    display: flex;
+
+    gap: 20px;
+
+    margin-top: 40px;
+}
+
+
+/* 枠 */
+.small-box {
+    position: relative;
+
+    flex: 1;
+
+    min-height: 180px;
+
+    padding: 55px 35px 30px;
+
+    background: var(--cream);
+
+    border: 3px solid #8FA36B;
+    border-radius: 22px;
+
+    box-shadow:
+        0 5px 0 rgba(51,64,74,0.08),
+        0 8px 18px rgba(51,64,74,0.12);
+
+    box-sizing: border-box;
+}
+
+
+/* 見出し */
+.small-box h2 {
+    position: absolute;
+
+    top: -25px;
+    left: 25px;
+
+    margin: 0;
+    padding: 5px 18px;
+
+    background-color: var(--cream);
+
+    color: #33404A;
+
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+
+/* 中身 */
+.small-box ul {
+    margin: 0;
+    padding-left: 25px;
+}
+
+
+/* ゴミの名前 */
+.small-box li {
+    margin: 18px 0;
+
+    font-size: 18px;
+}
+
+/* =========================
+   スマホ対応（PCのデザインは維持）
+========================= */
+@media screen and (max-width: 600px) {
+
+    html, body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
     }
+
+    body {
+        font-size: 16px;
+        line-height: 1.8;
+        padding: 10px 12px 50px;
+    }
+
+    /* 上部のボタン */
+    left, right {
+        display: inline-block;
+        max-width: 49%;
+        vertical-align: top;
+    }
+
+    right {
+        float: right;
+        text-align: right;
+    }
+
     select, button {
-      width: 100%;
+        width: auto;
+        max-width: 100%;
+        min-height: 40px;
+        height: auto;
+        padding: 8px 12px;
+        font-size: 14px;
+        white-space: normal;
     }
-  }
+
+    /* タイトル */
+    .hero {
+        padding: 28px 4px 24px;
+    }
+
+    .hero-cards {
+        gap: 10px;
+        margin-bottom: 14px;
+    }
+
+    .mini-card {
+        width: 44px;
+        height: 60px;
+        font-size: 23px;
+    }
+
+    h1 {
+        font-size: clamp(24px, 7vw, 34px);
+        line-height: 1.4;
+        overflow-wrap: anywhere;
+    }
+
+    .subtitle {
+        font-size: 14px;
+        line-height: 1.6;
+        letter-spacing: 0.03em;
+    }
+
+    /* 全体の枠 */
+    .wrap,
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+        margin: 20px auto;
+    }
+
+    /* 大きな枠 */
+    .category-box {
+        width: 100%;
+        padding: 38px 16px 22px;
+        margin-top: 42px;
+        border-radius: 18px;
+    }
+
+    .category-box h2 {
+        top: -20px;
+        left: 12px;
+        max-width: calc(100% - 24px);
+        padding: 4px 12px;
+        font-size: 19px;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
+    }
+
+    .category-box ul {
+        padding-left: 22px;
+    }
+
+    .category-box li {
+        margin: 12px 0;
+        padding-left: 2px;
+        font-size: 16px;
+        line-height: 1.7;
+        overflow-wrap: anywhere;
+    }
+
+    /* 下の小さな枠 */
+    .three-boxes {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        width: 100%;
+        margin-top: 28px;
+    }
+
+    .small-box {
+        flex: 1 1 calc(50% - 6px);
+        min-width: 0;
+        max-width: 100%;
+        min-height: 120px;
+        padding: 42px 12px 18px;
+        border-radius: 16px;
+    }
+
+    .small-box h2 {
+        top: -18px;
+        left: 8px;
+        max-width: calc(100% - 16px);
+        padding: 4px 8px;
+        font-size: 16px;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
+    }
+
+    .small-box ul {
+        padding-left: 18px;
+    }
+
+    .small-box li {
+        margin: 10px 0;
+        font-size: 15px;
+        line-height: 1.7;
+        overflow-wrap: anywhere;
+    }
+
+    /* 文字は横書きにして、枠内で折り返す */
+    p, li, h2, h3 {
+        writing-mode: horizontal-tb;
+        overflow-wrap: anywhere;
+    }
+
+}
+
+/* 幅が360px以下のスマホ */
+@media screen and (max-width: 360px) {
+
+    .small-box {
+        flex-basis: 100%;
+    }
+
+    .category-box {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+}
+
+
 </style>
 </head>
 <body>
+<div>
+<left>
+ <a href="../area.html">
+    <button class="area-btn">もどる</button>
+ </a>
+</left>
 
+
+<right>
+ <a href="../roulette.html">
+    <button class="roulette-btn">ルーレット</button>
+ </a>
+</right>
+</div>
   <div class="hero">
     <div class="hero-cards">
       <div class="mini-card">🥫</div>
@@ -464,29 +781,6 @@
       <div class="mini-card">♻️</div>
     </div>
     <h1>伊丹市ごみ分別</h1>
-
-    <div class="nav-area">
-      <a href="../index.html">
-        <button class="home-btn">ホーム</button>
-      </a>
-
-      <a href="../rule.html">
-        <button class="rule-btn">ルール</button>
-      </a>
-
-      <a href="../area.html">
-        <button class="index-btn"><ruby>地域<rt>ちいき</rt></ruby><ruby>選択<rt>せんたく</rt></ruby></button>
-      </a>
-
-      <a href="../q&a.html">
-        <button class="qa-btn">Q&A</button>
-      </a>
-
-      <a href="roulette.html">
-        <button class="roulette-btn">ルーレット</button>
-      </a>
-    </div>
-  </div>
 
 <script>
   const buttons = document.querySelectorAll('.tab-btn');
