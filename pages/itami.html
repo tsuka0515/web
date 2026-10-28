@@ -127,14 +127,6 @@
     color:var(--ink);
     letter-spacing:0.02em;
   }
-  .subtitle{
-    font-family:'Zen Maru Gothic', sans-serif;
-    font-weight:700;
-    color:var(--ink-soft);
-    font-size:17px;
-    margin:0;
-    letter-spacing:0.1em;
-  }
 
   .container {
     width: 92%;
@@ -142,7 +134,7 @@
     margin: 40px auto;
   }
 
-  /* ごみ分別の枠 */
+  /* 基本の枠構造 */
   .category-box {
     position: relative;
     width: 92%;
@@ -230,6 +222,50 @@
     font-size: clamp(15px, 2.5vw, 18px);
   }
 
+  /* =======================================
+     ★ 枠ごとの個別カラー設定（ここを自由に変更）
+  ======================================= */
+  /* 1. 資源ごみ（大枠） */
+  .box-shigen { background-color: #fff7ea; border-color: #e9a62a; }
+  .box-shigen > h2 { background-color: #fff7ea; }
+
+  /* 2. カン */
+  .box-kan { background-color: #fcffcd; border-color: #ecf56e; }
+  .box-kan h2 { background-color: #fcffcd; }
+
+  /* 3. ビン */
+  .box-bin { background-color: #cdffd1; border-color: #51f85f; }
+  .box-bin h2 { background-color: #cdffd1; }
+
+  /* 4. ペットボトル */
+  .box-pet { background-color: #d5faff; border-color: #72dae7; }
+  .box-pet h2 { background-color: #d5faff; }
+
+  /* 5. 古着 */
+  .box-furugi { background-color: #ffdbff; border-color: #e991e9; }
+  .box-furugi h2 { background-color: #ffdbff; }
+
+  /* 6. 古紙 */
+  .box-koshi { background-color: #fdc962fb; border-color: #bb7f07fb; }
+  .box-koshi h2 { background-color: #fdc962fb; }
+
+  /* 7. プラスチック */
+  .box-plastic { background-color: #c7f7bd; border-color: #4cc933; }
+  .box-plastic h2 { background-color: #c7f7bd; }
+
+  /* 8. 燃えるゴミ */
+  .box-moeru { background-color: #fdcdcd; border-color: #f11212; }
+  .box-moeru h2 { background-color: #fdcdcd; }
+
+  /* 9. 燃えないゴミ */
+  .box-moenai { background-color: #c0c1f7; border-color: #2529f1; }
+  .box-moenai h2 { background-color: #c0c1f7; }
+
+  /* 10. 危険物 */
+  .box-kiken { background-color: #f3d1fc; border-color: #8f07b1; }
+  .box-kiken h2 { background-color: #f3d1fc; }
+
+
   @media (prefers-reduced-motion: reduce){
     *{ transition:none !important; scroll-behavior:auto !important; }
   }
@@ -275,26 +311,27 @@
       <div class="mini-card">📄</div>
       <div class="mini-card">♻️</div>
     </div>
-    <h1>伊丹市ごみ分別</h1>
+    <h1><ruby>伊丹市<rt>いたみし</rt></ruby>ごみ<ruby>分別<rt>ぶんべつ</rt></ruby></h1>
   </div>
 
-<div class="category-box">
+<!-- 資源ごみ枠 (box-shigen) -->
+<div class="category-box box-shigen">
 
-    <h2>資源ごみ</h2>
+    <h2><ruby>資源<rt>しげん</rt></ruby>ごみ</h2>
 
     <ul>
-        <li>食品トレー</li>
+        <li><ruby>食品<rt>しょくひん</rt></ruby>トレー</li>
         <li>トイレットペーパーのしん</li>
-        <li>発泡スチロール</li>
+        <li><ruby>発泡<rt>はっぽう</rt></ruby>スチロール</li>
         <li>シャツ</li>
-        <li>紙コップ</li>
-        <li>牛乳パック</li>
-        <li>ティッシュ箱</li>
-        <li>レジ袋</li>
-        <li>お菓子の梱包材</li>
+        <li><ruby>紙<rt>かみ</rt></ruby>コップ</li>
+        <li><ruby>牛乳<rt>ぎゅうにゅう</rt></ruby>パック</li>
+        <li>ティッシュ<ruby>箱<rt>ばこ</rt></ruby></li>
+        <li>レジ<ruby>袋<rt>ぶくろ</rt></ruby></li>
+        <li>お<ruby>菓子<rt>がし</rt></ruby>の<ruby>梱包材<rt>こんぽうざい</rt></ruby></li>
         <li>ダンボール</li>
-        <li>新聞紙</li>
-        <li>ジュース缶</li>
+        <li><ruby>新聞紙<rt>しんぶんし</rt></ruby></li>
+        <li>ジュース<ruby>缶<rt>かん</rt></ruby></li>
         <li>ビン</li>
         <li>ペットボトル</li>
     </ul>
@@ -302,16 +339,17 @@
 <!-- 下の3つの枠 -->
     <div class="three-boxes">
 
-        <div class="small-box">
+        <!-- カン (box-kan) -->
+        <div class="small-box box-kan">
             <h2>カン</h2>
 
             <ul>
-                <li>ジュース缶</li>
+                <li>ジュース<ruby>缶<rt>かん</rt></ruby></li>
             </ul>
         </div>
 
-
-        <div class="small-box">
+        <!-- ビン (box-bin) -->
+        <div class="small-box box-bin">
             <h2>ビン</h2>
 
             <ul>
@@ -319,8 +357,8 @@
             </ul>
         </div>
 
-
-        <div class="small-box">
+        <!-- ペットボトル (box-pet) -->
+        <div class="small-box box-pet">
             <h2>ペットボトル</h2>
 
             <ul>
@@ -332,36 +370,37 @@
 
     <div class="three-boxes">
 
-        <div class="small-box">
-            <h2>古着</h2>
+        <!-- 古着 (box-furugi) -->
+        <div class="small-box box-furugi">
+            <h2><ruby>古着<rt>ふるぎ</rt></ruby></h2>
 
             <ul>
                 <li>シャツ</li>
             </ul>
         </div>
 
-
-        <div class="small-box">
-            <h2>古紙</h2>
+        <!-- 古紙 (box-koshi) -->
+        <div class="small-box box-koshi">
+            <h2><ruby>古紙<rt>こし</rt></ruby></h2>
 
             <ul>
-                <li>新聞紙</li>
+                <li><ruby>新聞紙<rt>しんぶんし</rt></ruby></li>
                 <li>ダンボール</li>
-                <li>牛乳パック</li>
-                <li>ティッシュ箱</li>
-                <li>紙コップ</li>
+                <li><ruby>牛乳<rt>ぎゅうにゅう</rt></ruby>パック</li>
+                <li>ティッシュ<ruby>箱<rt>ばこ</rt></ruby></li>
+                <li><ruby>紙<rt>かみ</rt></ruby>コップ</li>
                 <li>トイレットペーパーのしん</li>
             </ul>
         </div>
 
-
-        <div class="small-box">
+        <!-- プラスチック (box-plastic) -->
+        <div class="small-box box-plastic">
             <h2>プラスチック</h2>
 
             <ul>
-                <li>食品トレー</li>
-                <li>発泡スチロール</li>
-                <li>レジ袋</li>
+                <li><ruby>食品<rt>しょくひん</rt></ruby>トレー</li>
+                <li><ruby>発泡<rt>はっぽう</rt></ruby>スチロール</li>
+                <li>レジ<ruby>袋<rt>ぶくろ</rt></ruby></li>
             </ul>
         </div>
 
@@ -371,35 +410,37 @@
 <div class="container" style="margin-top:0;">
     <div class="three-boxes">
 
-            <div class="small-box">
-                <h2>燃えるゴミ</h2>
+            <!-- 燃えるゴミ (box-moeru) -->
+            <div class="small-box box-moeru">
+                <h2><ruby>燃<rt>も</rt></ruby>えるゴミ</h2>
 
                 <ul>
                     <li>ボール</li>
-                    <li>生ごみ</li>
+                    <li><ruby>生<rt>なま</rt></ruby>ごみ</li>
                 </ul>
             </div>
 
-
-            <div class="small-box">
-                <h2>燃えないゴミ</h2>
+            <!-- 燃えないゴミ (box-moenai) -->
+            <div class="small-box box-moenai">
+                <h2><ruby>燃<rt>も</rt></ruby>えないゴミ</h2>
 
                 <ul>
-                    <li>乾電池</li>
-                    <li>傘</li>
-                    <li>スプレー缶</li>
+                    <li><ruby>乾電池<rt>かんでんち</rt></ruby></li>
+                    <li><ruby>傘<rt>かさ</rt></ruby></li>
+                    <li>スプレー<ruby>缶<rt>かん</rt></ruby></li>
                 </ul>
             </div>
     </div>
 </div>
 
-<div class="category-box" style="margin-top: 40px;">
+<!-- 危険物 (box-kiken) -->
+<div class="category-box box-kiken" style="margin-top: 40px;">
 
-    <h2>危険物</h2>
+    <h2><ruby>危険物<rt>きけんぶつ</rt></ruby></h2>
 
     <ul>
         <li>モバイルバッテリー</li>
-        <li>乾電池</li>
+        <li><ruby>乾電池<rt>かんでんち</rt></ruby></li>
     </ul>
 </div>
 </body>
