@@ -263,57 +263,68 @@
 
   ruby{ font-feature-settings:"ruby" 1; }
 
-  @media (prefers-reduced-motion: reduce){
+@media (prefers-reduced-motion: reduce){
     *{ transition:none !important; scroll-behavior:auto !important; }
   }
 
-  @media (max-width:480px){
-    body{ font-size:16.5px; }
-    .card{ padding:20px 18px; }
-    .tab-btn{ font-size:15px; padding:14px 6px;}
+@media (max-width: 768px) {
+    .container, .category-box {
+      width: 94%;
+      margin-top: 40px;
+    }
+    .fixed-btn-left, .fixed-btn-right {
+      top: 10px;
+    }
+    .fixed-btn-left { left: 10px; }
+    .fixed-btn-right { right: 10px; }
+    select, button, .back-btn, .roulette-btn {
+      height: 44px;
+      padding: 4px 10px;
+    }
   }
 
-  select,button{
+  select, button, .back-btn, .roulette-btn {
     font-family:'Zen Maru Gothic', sans-serif;
-    font-size:18px;
+    font-size: clamp(14px, 2vw, 17px);
     font-weight:700;
-
-    width:140px;
-    height:60px;
-
-    padding:10px 20px;
-
-    background:#fff;
-    color:var(--ink);
-
-    border:3px solid var(--green);
-    border-radius:14px;
-
+    min-width: 90px;
+    height: 50px;
+    padding: 6px 14px;
+    background: #fff;
+    color: var(--ink);
+    border: 3px solid var(--green);
+    border-radius: 14px;
     box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
 
-    cursor:pointer;
-    transition:0.2s;
-}
+  .back-btn:active, .roulette-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 rgba(51,64,74,0.08);
+  }
 
-.index-btn{
-    border-color:var(--green);
-}
+  .back-btn{ border-color:var(--green); }
 
-.rule-btn{
-    border-color:var(--yellow);
-}
 
-.area-btn{
-    border-color:var(--red);
-}
+.fixed-btn-left {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1000;
+  }
 
-.qa-btn{
-    border-color:var(--blue);
-}
 
 </style>
 </head>
 <body>
+<div class="fixed-btn-left">
+    <a href="index.html" class="back-btn">◀ もどる</a>
+  </div>
 
   <div class="hero">
     <div class="hero-cards">
@@ -444,9 +455,6 @@
 </script>
 <br>
 <center>
-    <a href="index.html">
-        <button class="index-btn">もどる</button>
-    </a>
     <a href="area.html">
         <button class="area-btn">つぎへ</button>
     </a>
