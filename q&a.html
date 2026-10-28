@@ -347,7 +347,22 @@ summary {
             line-height: 1.8;
         }
 
-select, button, .back-btn, .roulette-btn {
+        
+@media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; scroll-behavior:auto !important; }
+  }
+
+@media (max-width: 768px) {
+    .container, .category-box {
+      width: 94%;
+      margin-top: 40px;
+    }
+    .fixed-btn-left, .fixed-btn-right {
+      top: 10px;
+    }
+    .fixed-btn-left { left: 10px; }
+    .fixed-btn-right { right: 10px; }
+    select, button, .back-btn, .roulette-btn {
       height: 44px;
       padding: 4px 10px;
     }
@@ -387,7 +402,7 @@ select, button, .back-btn, .roulette-btn {
     left: 15px;
     z-index: 1000;
   }
-  
+
 </style>
 </head>
 <body>
