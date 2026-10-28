@@ -63,9 +63,13 @@
     top: 15px;
     right: 15px;
     z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
   }
 
-  select, button, .back-btn, .roulette-btn {
+  select, button, .back-btn, .roulette-btn, .qa-btn {
     font-family:'Zen Maru Gothic', sans-serif;
     font-size: clamp(14px, 2vw, 17px);
     font-weight:700;
@@ -85,13 +89,14 @@
     text-decoration: none;
   }
 
-  .back-btn:active, .roulette-btn:active {
+  .back-btn:active, .roulette-btn:active, .qa-btn:active {
     transform: translateY(2px);
     box-shadow: 0 2px 0 rgba(51,64,74,0.08);
   }
 
   .back-btn{ border-color:var(--green); }
   .roulette-btn{ border-color:#9B51E0; }
+  .qa-btn{ border-color:var(--blue); }
 
   /* HERO */
   .hero{
@@ -286,7 +291,7 @@
     }
     .fixed-btn-left { left: 10px; }
     .fixed-btn-right { right: 10px; }
-    select, button, .back-btn, .roulette-btn {
+    select, button, .back-btn, .roulette-btn, .qa-btn {
       height: 44px;
       padding: 4px 10px;
     }
@@ -300,9 +305,10 @@
     <a href="../area.html" class="back-btn">◀ もどる</a>
   </div>
 
-  <!-- 右上端：roulette.htmlへ飛ぶボタン（フォルダが異なる場合は ../roulette.html） -->
+  <!-- 右上端：ルーレットボタンとQ&Aボタン（フォルダが異なる場合は ../roulette.html や ../q&a.html） -->
   <div class="fixed-btn-right">
     <a href="../roulette.html" class="roulette-btn">ルーレット</a>
+    <a href="../q&a.html" class="qa-btn">Q&A</a>
   </div>
 
   <div class="hero">
@@ -317,7 +323,7 @@
 <!-- 資源ごみ枠 (box-shigen) -->
 <div class="category-box box-shigen">
 
-    <h2><ruby>資源<rt>しげん</rt></ruby>ごみ(リサイクル)</h2>
+    <h2><ruby>資源<rt>しげん</rt></ruby>ごみ</h2>
 
     <ul>
         <li><ruby>食品<rt>しょくひん</rt></ruby>トレー</li>
