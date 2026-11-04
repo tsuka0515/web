@@ -611,7 +611,7 @@ const result = document.getElementById("result");
 const spinButton = document.getElementById("spinButton");
 const questionList = document.getElementById("questionList");
 
-const colors = ["#ffcf8b", "#b9e4a5", "#a9d9f5"];
+const colors = ["#ffcf8b", "#b9e4a5", "#a9d9f5", "#f5b5cf"];
 
 // 右側に8つの質問を表示
 questions.forEach(question => {
@@ -646,11 +646,22 @@ ctx.stroke();
         return;
     }
 
-    const slice = (Math.PI * 2) / selectedQuestions.length;
+    // 通常の質問は1、特別枠は0.5として角度を計算する
+    const getWeight = question =>
+        (question === "質問なし" || question === "押しつけ枠") ? 0.5 : 1;
+
+    const totalWeight = selectedQuestions.reduce(
+        (sum, question) => sum + getWeight(question), 0
+    );
+
+    let passedWeight = 0;
 
     selectedQuestions.forEach((question, i) => {
-        const start = angle + i * slice - Math.PI / 2;
+        const weight = getWeight(question);
+        const slice = (Math.PI * 2) * weight / totalWeight;
+        const start = angle + (Math.PI * 2) * passedWeight / totalWeight - Math.PI / 2;
         const end = start + slice;
+        passedWeight += weight;
 
         ctx.beginPath();
         ctx.moveTo(cx, cy);
@@ -710,10 +721,17 @@ ctx.stroke();
 function startRoulette() {
     if (isSpinning) return;
 
-    // 毎回8問からランダムに3問選択
+    // 毎回8問からランダムに3問選ぶ
     selectedQuestions = [...questions]
         .sort(() => Math.random() - 0.5)
         .slice(0, 3);
+
+    // 通常の質問枠の半分の大きさの特別枠を2個ずつ追加
+    selectedQuestions.push("質問なし", "質問なし");
+    selectedQuestions.push("押しつけ枠", "押しつけ枠");
+
+    // 7つの枠の配置を毎回ランダムにする
+    selectedQuestions.sort(() => Math.random() - 0.5);
 
     // 右側の一覧で選ばれた質問を強調
     [...questionList.children].forEach(li => {
@@ -729,16 +747,35 @@ function startRoulette() {
     spinButton.disabled = true;
     result.textContent = "回転中...";
 
-    // ランダムに当選する質問を決める
-    const winnerIndex = Math.floor(
-        Math.random() * selectedQuestions.length
+    // 枠の大きさ（重さ）に応じて当選枠を決める
+    const getWeight = question =>
+        (question === "質問なし" || question === "押しつけ枠") ? 0.5 : 1;
+
+    const totalWeight = selectedQuestions.reduce(
+        (sum, question) => sum + getWeight(question), 0
     );
 
-    const slice = (Math.PI * 2) / selectedQuestions.length;
+    let randomWeight = Math.random() * totalWeight;
+    let winnerIndex = 0;
 
-    // 描画時の扇形中心は angle + (winnerIndex + 0.5) * slice - π/2。
-    // 固定矢印の方向（12時＝-π/2）に合わせるため、開始位置の補正は相殺する。
-    const targetAngle = -(winnerIndex + 0.5) * slice;
+    for (let i = 0; i < selectedQuestions.length; i++) {
+        randomWeight -= getWeight(selectedQuestions[i]);
+        if (randomWeight < 0) {
+            winnerIndex = i;
+            break;
+        }
+    }
+
+    // 当選枠の中心が固定矢印（12時）に来るよう、枠の重さから角度を計算
+    const beforeWinnerWeight = selectedQuestions
+        .slice(0, winnerIndex)
+        .reduce((sum, question) => sum + getWeight(question), 0);
+
+    const winnerWeight = getWeight(selectedQuestions[winnerIndex]);
+
+    const targetAngle = -(
+        (beforeWinnerWeight + winnerWeight / 2) / totalWeight
+    ) * Math.PI * 2;
 
     // 現在角度から、何周かした後に当たりの角度で止める
     const normalizedTarget =
@@ -775,8 +812,14 @@ function startRoulette() {
             angle = endAngle;
             drawRoulette();
 
-            result.textContent =
-                "結果：" + selectedQuestions[winnerIndex];
+            if (selectedQuestions[winnerIndex] === "質問なし") {
+                result.textContent = "結果：🎉 当たり！質問なし！";
+            } else if (selectedQuestions[winnerIndex] === "押しつけ枠") {
+                result.textContent = "結果：押しつけ枠！";
+            } else {
+                result.textContent =
+                    "結果：" + selectedQuestions[winnerIndex];
+            }
 
             isSpinning = false;
             spinButton.disabled = false;
