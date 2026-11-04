@@ -255,12 +255,6 @@
   .score-row .dot.y{ background:var(--yellow); }
   .score-row .dot.r{ background:var(--red); }
 
-  .note{
-    color:var(--ink-soft);
-    font-size:15px;
-    margin-top:14px;
-  }
-
   ruby{ font-feature-settings:"ruby" 1; }
 
   @media (prefers-reduced-motion: reduce){
@@ -402,6 +396,34 @@
       padding:40px 15px 20px;
     }
   }
+
+  /* =======================================
+     ★ 枠ごとの個別カラー設定（伊丹市コードから移植）
+  ======================================= */
+  /* 資源ごみ・リサイクル（大枠） */
+  .category-box.box-shigen { background-color: #fff7ea; border-color: #e9a62a; }
+  .category-box.box-shigen > h2 { background-color: #fff7ea; }
+
+  /* 資源ごみ（小枠） */
+  .small-box.box-shigen-small { background-color: #fcffcd; border-color: #ecf56e; }
+  .small-box.box-shigen-small h2 { background-color: #fcffcd; }
+
+  /* プラスチック資源 */
+  .small-box.box-plastic { background-color: #c7f7bd; border-color: #4cc933; }
+  .small-box.box-plastic h2 { background-color: #c7f7bd; }
+
+  /* 古紙・衣類 */
+  .small-box.box-koshi { background-color: #fdc962fb; border-color: #bb7f07fb; }
+  .small-box.box-koshi h2 { background-color: #fdc962fb; }
+
+  /* 普通ごみ */
+  .small-box.box-futsu { background-color: #fdcdcd; border-color: #f11212; }
+  .small-box.box-futsu h2 { background-color: #fdcdcd; }
+
+  /* 粗大ごみ */
+  .small-box.box-sodai { background-color: #c0c1f7; border-color: #2529f1; }
+  .small-box.box-sodai h2 { background-color: #c0c1f7; }
+
 </style>
 </head>
 <body>
@@ -423,47 +445,44 @@
   </div>
 
   <div class="container">
-    <div class="category-box">
+    <div class="category-box box-shigen">
       <h2><ruby>資源<rt>しげん</rt></ruby>ごみ・リサイクル</h2>
       <ul>
-        <li><ruby>缶<rt>かん</rt></ruby>・びん・ペットボトル・<ruby>金属製生活用品<rt>きんぞくせいせいかつようひん</rt></ruby>（<ruby>資源<rt>しげん</rt></ruby>ごみ）</li>
-        <li>プラスチック<ruby>資源<rt>しげん</rt></ruby>（プラマークのある<ruby>容器<rt>ようき</rt></ruby>や<ruby>包装<rt>ほうそう</rt></ruby>）</li>
-        <li><ruby>古紙<rt>こし</rt></ruby>・<ruby>衣類<rt>いるい</rt></ruby>（<ruby>新聞<rt>しんぶん</rt></ruby>・<ruby>雑誌<rt>ざっし</rt></ruby>・<ruby>段<rt>だん</rt></ruby>ボール・<ruby>古着<rt>ふるぎ</rt></ruby>など）</li>
+        <li><ruby>缶<rt>かん</rt></ruby>・びん・ペットボトル・<ruby>金属製生活用品<rt>きんぞくせいせいかつようひん</rt></ruby></li>
+        <li>プラスチック<ruby>資源<rt>しげん</rt></ruby></li>
+        <li><ruby>古紙<rt>こし</rt></ruby>・<ruby>衣類<rt>いるい</rt></ruby></li>
       </ul>
 
       <div class="three-boxes">
-        <div class="small-box">
+        <div class="small-box box-shigen-small">
           <h2><ruby>資源<rt>しげん</rt></ruby>ごみ</h2>
           <ul>
-            <li><ruby>飲料<rt>いんりょう</rt></ruby>・<ruby>食品<rt>しょくひん</rt></ruby>の<ruby>缶<rt>かん</rt></ruby>・びん</li>
-            <li>ペットボトル（キャップ・ラベルはプラ<ruby>資源<rt>しげん</rt></ruby>へ）</li>
-            <li>なべ・やかんなどの<ruby>金属製生活用品<rt>きんぞくせいせいかつようひん</rt></ruby>（30cm<ruby>以下<rt>いか</rt></ruby>）</li>
-            <li>スプレー缶・カセットボンベ（使い切り・穴あけ不要）</li>
+            <li><ruby>缶<rt>かん</rt></ruby>・びん</li>
+            <li>ペットボトル</li>
+            <li><ruby>金属製生活用品<rt>きんぞくせいせいかつようひん</rt></ruby></li>
+            <li>スプレー<ruby>缶<rt>かん</rt></ruby>・カセットボンベ</li>
           </ul>
-          <p class="note"><ruby>中身<rt>なかみ</rt></ruby>を<ruby>空<rt>から</rt></ruby>にして<ruby>水<rt>みず</rt></ruby>ですすぎ、<ruby>透明<rt>とうめい</rt></ruby>・<ruby>半透明<rt>はんとうめい</rt></ruby>の<ruby>袋<rt>ふくろ</rt></ruby>で<ruby>出<rt>だ</rt></ruby>します。※スプレー缶・カセットボンベは<ruby>中身<rt>なかみ</rt></ruby>を使い切り、<ruby>他<rt>ほか</rt></ruby>の<ruby>資源<rt>しげん</rt></ruby>ごみとは<ruby>別<rt>べつ</rt></ruby>の<ruby>透明<rt>とうめい</rt></ruby>・<ruby>半透明<rt>はんとうめい</rt></ruby>の<ruby>袋<rt>ふくろ</rt></ruby>にまとめます。</p>
         </div>
 
-        <div class="small-box">
+        <div class="small-box box-plastic">
           <h2>プラスチック<ruby>資源<rt>しげん</rt></ruby></h2>
           <ul>
             <li><ruby>食品<rt>しょくひん</rt></ruby>トレー・たまごパック・カップ麺<ruby>容器<rt>ようき</rt></ruby></li>
-            <li>お<ruby>菓子<rt>かし</rt></ruby>・<ruby>冷凍食品<rt>れいとうしょくひん</rt></ruby>の<ruby>袋<rt>ふくろ</rt></ruby>・レジ<ruby>袋<rt>ふくろ</rt></ruby></li>
+            <li>お<ruby>菓子<rt>かし</rt></ruby>・<ruby>冷凍食品<rt>れいとうしょくひん</rt></ruby>の<ruby>袋<rt>ふくろ</rt></ruby>・レジ<ruby>袋<rt>ぶくろ</rt></ruby></li>
             <li>シャンプー・<ruby>洗剤<rt>せんざい</rt></ruby>のボトル</li>
             <li>ペットボトルのキャップ・ラベル</li>
-            <li><ruby>商品<rt>しょうひん</rt></ruby>を<ruby>包<rt>つつ</rt></ruby>んでいた発泡スチロール</li>
+            <li><ruby>発泡<rt>はっぽう</rt></ruby>スチロール</li>
           </ul>
-          <p class="note">プラマークがある<ruby>容器<rt>ようき</rt></ruby>や<ruby>包装<rt>ほうそう</rt></ruby>が<ruby>対象<rt>たいしょう</rt></ruby>です。<ruby>水<rt>みず</rt></ruby>ですすいで<ruby>汚<rt>よご</rt></ruby>れを<ruby>落<rt>お</rt></ruby>とし、<ruby>透明<rt>とうめい</rt></ruby>・<ruby>半透明<rt>はんとうめい</rt></ruby>の<ruby>袋<rt>ふくろ</rt></ruby>で<ruby>出<rt>だ</rt></ruby>します。<ruby>汚<rt>よご</rt></ruby>れが<ruby>取<rt>と</rt></ruby>れないものは<ruby>普通<rt>ふつう</rt></ruby>ごみです。</p>
         </div>
 
-        <div class="small-box">
+        <div class="small-box box-koshi">
           <h2><ruby>古紙<rt>こし</rt></ruby>・<ruby>衣類<rt>いるい</rt></ruby></h2>
           <ul>
             <li><ruby>新聞<rt>しんぶん</rt></ruby>・チラシ・<ruby>雑誌<rt>ざっし</rt></ruby>・<ruby>本<rt>ほん</rt></ruby></li>
             <li><ruby>段<rt>だん</rt></ruby>ボール・<ruby>紙<rt>かみ</rt></ruby>パック・<ruby>紙箱<rt>かみばこ</rt></ruby>・<ruby>紙袋<rt>かみぶくろ</rt></ruby></li>
-            <li>シャツ・ズボン・ジャケットなどの<ruby>衣類<rt>いるい</rt></ruby></li>
+            <li><ruby>衣類<rt>いるい</rt></ruby></li>
             <li>タオル・シーツ</li>
           </ul>
-          <p class="note"><ruby>紙類<rt>かみるい</rt></ruby>は<ruby>品目<rt>ひんもく</rt></ruby>ごとにひもでしばるか<ruby>袋<rt>ふくろ</rt></ruby>に入れます。<ruby>衣類<rt>いるい</rt></ruby>は<ruby>洗濯<rt>せんたく</rt></ruby>してかわかし、<ruby>透明<rt>とうめい</rt></ruby>・<ruby>半透明<rt>はんとうめい</rt></ruby>の<ruby>袋<rt>ふくろ</rt></ruby>に入れて<ruby>出<rt>だ</rt></ruby>します（<ruby>雨<rt>あめ</rt></ruby>の<ruby>日<rt>ひ</rt></ruby>は濡れないようしっかり<ruby>結<rt>むす</rt></ruby>びます）。</p>
         </div>
       </div>
     </div>
@@ -471,27 +490,25 @@
     <br>
 
     <div class="three-boxes">
-      <div class="small-box">
+      <div class="small-box box-futsu">
         <h2><ruby>普通<rt>ふつう</rt></ruby>ごみ</h2>
         <ul>
           <li><ruby>生<rt>なま</rt></ruby>ごみ・<ruby>茶<rt>ちゃ</rt></ruby>がら</li>
-          <li>プラマークのないプラスチック<ruby>製品<rt>せいひん</rt></ruby>（バケツ・おもちゃ・<ruby>文房具<rt>ぶんぼうぐ</rt></ruby>など）</li>
+          <li>プラマークのないプラスチック<ruby>製品<rt>せいひん</rt></ruby></li>
           <li><ruby>汚<rt>よご</rt></ruby>れの<ruby>取<rt>と</rt></ruby>れないプラスチック<ruby>容器<rt>ようき</rt></ruby></li>
-          <li>ゴム・かわ<ruby>製品<rt>せいひん</rt></ruby>（くつ・かばんなど）</li>
-          <li>ガラス・<ruby>陶器<rt>とうき</rt></ruby>・<ruby>電球<rt>でんきゅう</rt></ruby>（<ruby>紙<rt>かみ</rt></ruby>に<ruby>包<rt>つつ</rt></ruby>んで「キケン」と<ruby>表示<rt>ひょうじ</rt></ruby>）</li>
+          <li>ゴム・かわ<ruby>製品<rt>せいひん</rt></ruby></li>
+          <li>ガラス・<ruby>陶器<rt>とうき</rt></ruby>・<ruby>電球<rt>でんきゅう</rt></ruby></li>
         </ul>
-        <p class="note"><ruby>最大<rt>さいだい</rt></ruby>の<ruby>辺<rt>へん</rt></ruby>が30cm<ruby>以内<rt>いない</rt></ruby>（<ruby>棒状<rt>ぼうじょう</rt></ruby>のものは1m<ruby>以内<rt>いない</rt></ruby>）のものが<ruby>対象<rt>たいしょう</rt></ruby>です。<ruby>生<rt>なま</rt></ruby>ごみはしっかり<ruby>水<rt>みず</rt></ruby>を<ruby>切<rt>き</rt></ruby>り、<ruby>中身<rt>なかみ</rt></ruby>の見える<ruby>透明<rt>とうめい</rt></ruby>・<ruby>半透明<rt>はんとうめい</rt></ruby>の<ruby>袋<rt>ふくろ</rt></ruby>で<ruby>出<rt>だ</rt></ruby>します。</p>
       </div>
 
-      <div class="small-box">
+      <div class="small-box box-sodai">
         <h2><ruby>粗大<rt>そだい</rt></ruby>ごみ</h2>
         <ul>
-          <li>タンス・ベッド・<ruby>机<rt>つくえ</rt></ruby>などの<ruby>大型<rt>おおがた</rt></ruby><ruby>家具<rt>かぐ</rt></ruby></li>
+          <li><ruby>大型<rt>おおがた</rt></ruby><ruby>家具<rt>かぐ</rt></ruby></li>
           <li><ruby>自転車<rt>じてんしゃ</rt></ruby>・<ruby>三輪車<rt>さんりんしゃ</rt></ruby></li>
           <li><ruby>布団<rt>ふとん</rt></ruby>・マットレス・カーペット</li>
-          <li>30cm（<ruby>棒状<rt>ぼうじょう</rt></ruby>は1m）を<ruby>超<rt>こ</rt></ruby>えるごみ</li>
+          <li>30cmを<ruby>超<rt>こ</rt></ruby>えるごみ</li>
         </ul>
-        <p class="note"><ruby>最大<rt>さいだい</rt></ruby>の<ruby>辺<rt>へん</rt></ruby>または<ruby>径<rt>けい</rt></ruby>が30cmを<ruby>超<rt>こ</rt></ruby>えるもの（<ruby>棒状<rt>ぼうじょう</rt></ruby>のものは1mを<ruby>超<rt>こ</rt></ruby>えるもの）は「<ruby>粗大<rt>そだい</rt></ruby>ごみ（<ruby>有料<rt>ゆうりょう</rt></ruby>・<ruby>事前申込制<rt>じぜんもうしこみせい</rt></ruby>）」です。<ruby>粗大<rt>そだい</rt></ruby>ごみ<ruby>受付<rt>うけつけ</rt></ruby>センターへ申し込んで<ruby>出<rt>だ</rt></ruby>します。</p>
       </div>
     </div>
   </div>
