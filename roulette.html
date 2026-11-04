@@ -648,7 +648,7 @@ ctx.stroke();
 
     // 通常の質問は1、特別枠は0.5として角度を計算する
     const getWeight = question =>
-        (question === "質問なし" || question === "押しつけ枠") ? 0.5 : 1;
+        (question === "質問なし" || question === "押しつけ") ? 0.5 : 1;
 
     const totalWeight = selectedQuestions.reduce(
         (sum, question) => sum + getWeight(question), 0
