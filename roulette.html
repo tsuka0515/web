@@ -749,7 +749,7 @@ function startRoulette() {
 
     // 枠の大きさ（重さ）に応じて当選枠を決める
     const getWeight = question =>
-        (question === "質問なし" || question === "押しつけ枠") ? 0.5 : 1;
+        (question === "質問なし" || question === "押しつけ") ? 0.5 : 1;
 
     const totalWeight = selectedQuestions.reduce(
         (sum, question) => sum + getWeight(question), 0
@@ -815,7 +815,7 @@ function startRoulette() {
             if (selectedQuestions[winnerIndex] === "質問なし") {
                 result.textContent = "結果：🎉 当たり！質問なし！";
             } else if (selectedQuestions[winnerIndex] === "押しつけ枠") {
-                result.textContent = "結果：押しつけ枠！";
+                result.textContent = "結果：押しつけ！ 右隣の人にルーレットを回してもらおう！";
             } else {
                 result.textContent =
                     "結果：" + selectedQuestions[winnerIndex];
